@@ -270,11 +270,11 @@ public class Main extends Canvas implements Runnable, KeyListener {
         Cells[X][Y] = "Body"; //die Zelle in dem der körper erzeugt wird soll blockiert sein
     }
 
-    public void createApple() {
+    public void createApple() { //neuen Apfel erzeugen
         do {
-            ax = rand.nextInt(20) + 1;
-            ay = rand.nextInt(20) + 1;
-        } while (!Cells[ax][ay].equals("leer"));
-        Cells[ax][ay] = "Apple";
+            ax = rand.nextInt(Windowsize) + 1;  //mit zufälligen Koordinaten
+            ay = rand.nextInt(Windowsize) + 1;
+        } while (!Cells[ax][ay].equals("leer")); //wenn die Zelle besetzt ist dann nochmal würfeln
+        Cells[ax][ay] = "Apple"; //die Zelle als Apfel markieren
     }
 }
