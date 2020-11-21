@@ -58,20 +58,36 @@ public class Main extends Canvas implements Runnable, KeyListener {
     }
 
 
+    public void start () {
+        thread = new Thread(this); //neuer thread. verstehe nicht ganz genau wie das tatsächlich funktioniert.
+        running = true; //das soll laufen (man ist am anfang nicht sofort gestorben
+        thread.start(); //der thread soll anfangen seine aufgaben zu machen, das spiel wird jetzt gestartet
+    }
+
+
+    public void stop () {//ääähhhhhh... i guess der thread muss wissen was er zu machen hat wenn er vorbei is? oder man kann damit den thread beenden?
+        running = false; //spiel wird angehalten
+        try {
+            thread.join(); //.... ganz ehrlich keine ahnung. soweit auch erstmal nich wichtig denk ich mal
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
-    public void paint(Graphics gr) {
-        gr.setColor(Color.RED);
-        for (int i = 0; i < Spacesize; i++) {
-            gr.drawLine(0, 0 + i, Width, 0 + i);
+    public void paint(Graphics gr) { //zeichnet auf dem Hintergrund
+        gr.setColor(Color.RED);  //das folgende wird in rot gezeichnet
+        for (int i = 0; i < Spacesize; i++) { //Rahmen
+            gr.drawLine(0, 0 + i, Width, 0 + i); //Von Koordinate (0|0+i) eine Linie bis zur Koordinate (Breite|0+i)
             gr.drawLine(0 + i, 0, 0 + i, Height);
             gr.drawLine(Width - i, 0, Width - i, Height);
             gr.drawLine(0, Height - i, Width, Height - i);
         }
 
 
-        gr.setColor(Color.RED);
-        if (grid) {
+        if (grid) { //Optionales Raster zum Debuggen
             for (int i = Cellsize + Spacesize; i < Width; i = i + Cellsize) {
                 for (int j = 1; j <= Spacesize; j++) {
                     gr.drawLine(0, i, Width, i);
@@ -86,7 +102,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
             }
         }
 
-        if (spacer) {
+        if (spacer) { //Optionale Hilfslinien zum Zählen fürs Debuggen
             gr.setColor(Color.CYAN);
             for (int i = (Cellsize + Spacesize) * 10; i < Width; i = i + (Cellsize + Spacesize) * 10 - Spacesize) {
                 for (int j = 1; j <= Spacesize; j++) {
@@ -96,51 +112,51 @@ public class Main extends Canvas implements Runnable, KeyListener {
             }
         }
 
-        gr.setColor(gre);
-        for (int i = 0; i < snake.size(); i++) {
-            gr.fillRect((snake.get(i).getx() - 1) * (Cellsize + Spacesize) + Spacesize, (snake.get(i).gety() - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize);
+        gr.setColor(gre);  //Schlangenteile Zeichnen
+        for (int i = 0; i < snake.size(); i++) { //Elemente der Arrayliste durchlaufen
+            gr.fillRect((snake.get(i).getx() - 1) * (Cellsize + Spacesize) + Spacesize, (snake.get(i).gety() - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize); //Körper an richtiger Stelle zeichnen
         }
     }
 
 
 
 
-    public void run() {
-        while (running) {
-            if (CellState) {
-                for (int i = 1; i < 20; i++) {
-                    for (int j = 1; j < 20; j++) {
-                        if (Cells[i][j] == null) {
+    public void run() { //Hauptmethode des Spiels
+        while (running) { //während man noch am leben ist
+            if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
+                for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
+                    for (int j = 1; j < 21; j++) {
+                        if (Cells[i][j] == null) { //Wenn die Zelle Leer ist "O" ausgeben
                             System.out.print("O");
-                        } else {
+                        } else {                   //Wenn da was drin is dann "X"
                             System.out.print("X");
                         }
-                        System.out.print("|");
+                        System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
                     }
-                    System.out.println();
+                    System.out.println(); //Nächste Zeile
                 }
-                System.out.println("next");
+                System.out.println("next"); //Nächster frame kennzeichnen
             }
 
 
-            if (direction == "right") {
-                if (Cells[snake.get(0).x + 1][snake.get(0).y] == null) {
-                    Move();
-                    if (snake.get(0).x == 50) {
-                        snake.get(0).x = 1;
+            if (direction == "right") { //Richtung in die gegangen wird
+                if (Cells[snake.get(0).x + 1][snake.get(0).y] == null) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
+                    Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
+                    if (snake.get(0).x == Windowsize) { //Wenn der Kopf am rand ist
+                        snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
                     } else {
-                        snake.get(0).x++;
+                        snake.get(0).x++; //ansonsten einfach in die richtung gehen
                     }
-                    lastdir = "right";
+                    lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
                 } else {
-                    running = false;
+                    running = false; //wenn der Kopf blockiert ist, dann Spiel beenden
                 }
             }
             if (direction == "left") {
                 if (Cells[snake.get(0).x - 1][snake.get(0).y] == null) {
                     Move();
                     if (snake.get(0).x == 1) {
-                        snake.get(0).x = 50;
+                        snake.get(0).x = Windowsize;
                     } else {
                         snake.get(0).x--;
                     }
@@ -153,7 +169,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 if (Cells[snake.get(0).x][snake.get(0).y-1] == null) {
                     Move();
                     if (snake.get(0).y == 1) {
-                        snake.get(0).y = 50;
+                        snake.get(0).y = Windowsize;
                     } else {
                         snake.get(0).y--;
                     }
@@ -165,7 +181,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 if (direction == "down") {
                     if (Cells[snake.get(0).x][snake.get(0).y+1] == null) {
                         Move();
-                        if (snake.get(0).y == 50) {
+                        if (snake.get(0).y == Windowsize) {
                             snake.get(0).y = 1;
                         } else {
                             snake.get(0).y++;
@@ -175,10 +191,10 @@ public class Main extends Canvas implements Runnable, KeyListener {
                         running=false;
                     }
                 }
-                Cells[snake.get(0).x][snake.get(0).y] = "Body";
-                repaint();
-                try {
-                    thread.sleep(speed);
+                Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
+                repaint();//Änderungen anzeigen
+                try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
+                    thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -189,42 +205,27 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 
 
-        public void Move(){
-            if (Growth > 0) {
-                snake.add(new Body(snake.get(snake.size() - 1).x, snake.get(snake.size() - 1).y));
+        public void Move(){  //Die Körperteile nachrücken lassen
+            if (Growth > 0) { //falls ein Apfel aufgehoben wurde bzw. die schlange noch wachsen soll
+                snake.add(new Body(snake.get(snake.size() - 1).x, snake.get(snake.size() - 1).y)); //neues Glied erzeugen an der stelle des letzten gliedes
                 Growth--;
             }
-            for (int i = snake.size() - 1; i > 0; i--) {
-                if (i == snake.size() - 1) {
-                    Cells[snake.get(i).x][snake.get(i).y] = null;
+
+            for (int i = snake.size() - 1; i > 0; i--) {//Arrayliste durchlaufen
+                if (i == snake.size() - 1) {//Falls es das letzte glied ist
+                    Cells[snake.get(i).x][snake.get(i).y] = null;//Die Zelle wieder freigeben damit sie nicht blockiert bleibt wenn der Körper sich weiter bewegt hat; damit man nicht an unsichtbaren Hindernissen stirbt
                 }
-                snake.get(i).x = snake.get(i - 1).x;
+                snake.get(i).x = snake.get(i - 1).x; //Die position wird die postion des vorausgehenden Gliedes
                 snake.get(i).y = snake.get(i - 1).y;
             }
         }
 
-        public void start () {
-            thread = new Thread(this);
-            running = true;
-            thread.start();
-        }
-
-        public void stop () {
-            running = false;
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
 
         @Override
-        public void keyPressed (KeyEvent k){
-            int key = k.getKeyCode();
-            if (key == KeyEvent.VK_RIGHT && !direction.equals("left") && !lastdir.equals("left")) {
-                direction = "right";
+        public void keyPressed (KeyEvent k){ //wenn ein knopf gedrückt wird
+            int key = k.getKeyCode(); // key ist hier der name für den "KeyListener". er sagt mir ob und welcher knopf wie gedrückt wird
+            if (key == KeyEvent.VK_RIGHT && !direction.equals("left") && !lastdir.equals("left")) { //"VK_RIGHT" ist die rechte pfeiltaste, ich hab hier nen InputBlocker reingetan damit die schlange nicht nach rechts gehen kann wenn sie davor nach links gegangen ist (sie soll nicht wieder in sich selbst reingehen können)
+                direction = "right"; //die schlange soll als nächstes nach rechts gehen
             }
             if (key == KeyEvent.VK_LEFT && !direction.equals("right") && !lastdir.equals("right")) {
                 direction = "left";
@@ -240,16 +241,16 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 
         @Override
-        public void keyReleased (KeyEvent e){
+        public void keyReleased (KeyEvent e){ //wenn die taste losgelassen wird
         }
 
 
         @Override
-        public void keyTyped (KeyEvent e){
+        public void keyTyped (KeyEvent e){ //äh?
         }
 
-        public void create ( int X, int Y){
-            snake.add(new Body(X, Y));
-            Cells[X][Y] = "Body";
+        public void create ( int X, int Y){ //hiermit erzeugt man ein neues Objekt des typs "Body". damit mach ich neue körperteile wenn die schlange wachsen soll
+            snake.add(new Body(X, Y));//snake = die arrayliste. der liste wird ein neues glied gegeben das an den koordinaten (X|Y) erzeugt wird.
+            Cells[X][Y] = "Body"; //die Zelle in dem der körper erzeugt wird soll blockiert sein
         }
     }
