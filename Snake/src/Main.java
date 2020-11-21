@@ -1,5 +1,5 @@
 //DO: Apple spawn, pickup, Wait for input on start, Bestenliste? Multiplayer? Zeit/Speedrun? custom border? Portals? Levels? Enemies? Variable Speed? Special Pickups? Quests? Timer? Dash? Abilities?
-
+//Blerghhh
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
     public Thread thread; //Der thread der die Hauptmethode ausführt
     private ArrayList<Body> snake; //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
     Color gre = new Color(0, 255, 32); //Die Farbe der Schlange
-    public int tick = 0; //Nicht verwendet, eventuell zum speichern der Zeit
+    public int tick = 0; //Nicht verwendet, eventuell zum speichern der Zeit                               FIX
     public String direction = "right"; //Die richtung in die die SChlange als nächstes geht
     public String lastdir = "right"; //Die Richtung in die die Schlagen zuletzt gegangen ist
     public int Growth = 15; //Wie groß die Schlange am Anfang ist, wird auch verwendet für wie viele Teile noch generiert werden sollen nachdem man einen Apfel gegessen hat
