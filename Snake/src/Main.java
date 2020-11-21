@@ -252,5 +252,6 @@ public class Main extends Canvas implements Runnable, KeyListener {
         public void create ( int X, int Y){ //hiermit erzeugt man ein neues Objekt des typs "Body". damit mach ich neue körperteile wenn die schlange wachsen soll
             snake.add(new Body(X, Y));//snake = die arrayliste. der liste wird ein neues glied gegeben das an den koordinaten (X|Y) erzeugt wird.
             Cells[X][Y] = "Body"; //die Zelle in dem der körper erzeugt wird soll blockiert sein
+
         }
     }
