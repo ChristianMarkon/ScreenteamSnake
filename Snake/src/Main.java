@@ -88,8 +88,8 @@ public class Main extends Canvas implements Runnable, KeyListener {
     public void paint(Graphics gr) { //zeichnet auf dem Hintergrund
         gr.setColor(Color.RED);  //das folgende wird in rot gezeichnet                                              draw with empty rectangle
         for (int i = 0; i < Spacesize; i++) { //Rahmen
-            gr.drawLine(0, 0 + i, Width, 0 + i); //Von Koordinate (0|0+i) eine Linie bis zur Koordinate (Breite|0+i)
-            gr.drawLine(0 + i, 0, 0 + i, Height);
+            gr.drawLine(0, i, Width, i); //Von Koordinate (0|0+i) eine Linie bis zur Koordinate (Breite|0+i)
+            gr.drawLine(i, 0, i, Height);
             gr.drawLine(Width - i, 0, Width - i, Height);
             gr.drawLine(0, Height - i, Width, Height - i);
         }
@@ -138,14 +138,13 @@ public class Main extends Canvas implements Runnable, KeyListener {
             if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
                 for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
                     for (int j = 1; j < 21; j++) {
-                        if (Cells[j][i].equals("leer")) { //Wenn die Zelle Leer ist "O" ausgeben
-                            System.out.print("O");
-                        } else if (Cells[j][i].equals("Body")) {                   //Wenn da was drin is dann "X"
-                            System.out.print("X");
-                        } else if (Cells[j][i].equals("Apple")) {
-                            System.out.print("A");
-                        }else{
-                            System.out.print("F");
+                        switch (Cells[j][i]) {
+
+                            case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
+
+                            case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
+                            case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
+                            default -> System.out.print("F");
                         }
                         System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
                     }
@@ -182,7 +181,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 }
             }
             if (direction == "up") {
-                if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y-1].equals("Apple")) {
+                if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple")) {
                     Move();
                     if (snake.get(0).y == 1) {
                         snake.get(0).y = Windowsize;
@@ -195,7 +194,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 }
             }
             if (direction == "down") {
-                if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x ][snake.get(0).y+1].equals("Apple")) {
+                if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple")) {
                     Move();
                     if (snake.get(0).y == Windowsize) {
                         snake.get(0).y = 1;
