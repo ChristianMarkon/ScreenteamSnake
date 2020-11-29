@@ -11,9 +11,10 @@ import java.util.Random;
 public class Main extends Canvas implements Runnable, KeyListener {
 
     //Graphic Options
-    public static int Windowsize = 50; //Wie viele Zellen es im Fenster gibt                              FIX
-    public static int Cellsize = 10; //Wie groß die Zellen sind
-    public static int Spacesize = 2; //Wie groß der Abstand zwischen den Zellen ist
+    public static int Windowsize = 25; //Wie viele Zellen es im Fenster gibt
+    public static int Cellsize = 30; //Wie groß die Zellen sind
+    public static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
+    public static int Max = 1000; //Wie viele Pixel groß das Fenster sein darf
 
     //Gameplay options
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
@@ -40,6 +41,11 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 
     public static void main(String[] args) {
+        while(Width>Max){
+            Windowsize--;
+            Width = (Cellsize + Spacesize) * Windowsize + Spacesize;
+            Height= Width;
+        }
         Main can = new Main();
         JFrame frame = new JFrame("SNAAAAAAKE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,12 +92,9 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
     @Override
     public void paint(Graphics gr) { //zeichnet auf dem Hintergrund
-        gr.setColor(Color.RED);  //das folgende wird in rot gezeichnet                                              draw with empty rectangle
-        for (int i = 0; i < Spacesize; i++) { //Rahmen
-            gr.drawLine(0, i, Width, i); //Von Koordinate (0|0+i) eine Linie bis zur Koordinate (Breite|0+i)
-            gr.drawLine(i, 0, i, Height);
-            gr.drawLine(Width - i, 0, Width - i, Height);
-            gr.drawLine(0, Height - i, Width, Height - i);
+        gr.setColor(Color.RED);  //das folgende wird in rot gezeichnet                                           
+        for (int i = 0; i < Spacesize; i++) {
+            gr.drawRect(0+i, 0+i , Width-1-2*i, Height-1-2*i);
         }
 
 
