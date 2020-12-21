@@ -11,10 +11,12 @@ import java.util.Random;
 public class Main extends Canvas implements Runnable, KeyListener {
 
     //Graphic Options
-    public static int Windowsize = 25; //Wie viele Zellen es im Fenster gibt
+    public static int WindowsizeW = 25; //Wie viele Zellen es im Fenster gibt
+    public static int WindowsizeH = 10; //Wie viele Zellen es im Fenster gibt
     public static int Cellsize = 30; //Wie groß die Zellen sind
     public static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
-    public static int Max = 1000; //Wie viele Pixel groß das Fenster sein darf
+    public static int MaxH = 900; //Wie viele Pixel groß das Fenster sein darf
+    public static int MaxW = 1800; //Wie viele Pixel groß das Fenster sein darf
 
     //Gameplay options
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
@@ -26,7 +28,8 @@ public class Main extends Canvas implements Runnable, KeyListener {
     public static boolean CellState = false; //Ob permanent der Status vieler Zellen (bis 20 jeweils?) ausgegeben wird zum debuggen der Zellen selbst
 
 
-    public static int Width = (Cellsize + Spacesize) * Windowsize + Spacesize, Height = Width; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
+    public static int Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
+    public static int Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
     public Thread thread; //Der thread der die Hauptmethode ausführt
     private ArrayList<Body> snake; //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
     Color gre = new Color(0, 255, 32); //Die Farbe der Schlange
@@ -41,10 +44,13 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
 
     public static void main(String[] args) {
-        while(Width>Max){
-            Windowsize--;
-            Width = (Cellsize + Spacesize) * Windowsize + Spacesize;
-            Height= Width;
+        while(Width>MaxW){
+            WindowsizeW--;
+            Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
+        }
+        while(Height>MaxH){
+            WindowsizeH--;
+            Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
         }
         Main can = new Main();
         JFrame frame = new JFrame("SNAAAAAAKE");
@@ -61,9 +67,9 @@ public class Main extends Canvas implements Runnable, KeyListener {
         setFocusable(true); //Ob das Fenster angeklickt werden kann
         addKeyListener(this); //Damit die Knöpfe funktioneren
         snake = new ArrayList<Body>(3); //Arrayliste
-        Cells = new String[Windowsize + 2][Windowsize + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
-        for (int i = 0; i < Windowsize + 2; i++) {
-            for (int j = 0; j < Windowsize + 2; j++) {
+        Cells = new String[WindowsizeW + 2][WindowsizeH + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
+        for (int i = 0; i < WindowsizeW + 2; i++) {
+            for (int j = 0; j < WindowsizeH + 2; j++) {
                 Cells[i][j] = "leer";
             }
         }
@@ -160,7 +166,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
             if (direction == "right") { //Richtung in die gegangen wird
                 if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
                     Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
-                    if (snake.get(0).x == Windowsize) { //Wenn der Kopf am rand ist
+                    if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
                         snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
                     } else {
                         snake.get(0).x++; //ansonsten einfach in die richtung gehen
@@ -174,7 +180,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple")) {
                     Move();
                     if (snake.get(0).x == 1) {
-                        snake.get(0).x = Windowsize;
+                        snake.get(0).x = WindowsizeW;
                     } else {
                         snake.get(0).x--;
                     }
@@ -187,7 +193,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple")) {
                     Move();
                     if (snake.get(0).y == 1) {
-                        snake.get(0).y = Windowsize;
+                        snake.get(0).y = WindowsizeH;
                     } else {
                         snake.get(0).y--;
                     }
@@ -199,7 +205,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
             if (direction == "down") {
                 if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple")) {
                     Move();
-                    if (snake.get(0).y == Windowsize) {
+                    if (snake.get(0).y == WindowsizeH) {
                         snake.get(0).y = 1;
                     } else {
                         snake.get(0).y++;
@@ -274,8 +280,8 @@ public class Main extends Canvas implements Runnable, KeyListener {
 
     public void createApple() { //neuen Apfel erzeugen
         do {
-            ax = rand.nextInt(Windowsize) + 1;  //mit zufälligen Koordinaten
-            ay = rand.nextInt(Windowsize) + 1;
+            ax = rand.nextInt(WindowsizeW) + 1;  //mit zufälligen Koordinaten
+            ay = rand.nextInt(WindowsizeH) + 1;
         } while (!Cells[ax][ay].equals("leer")); //wenn die Zelle besetzt ist dann nochmal würfeln
         Cells[ax][ay] = "Apple"; //die Zelle als Apfel markieren
     }
