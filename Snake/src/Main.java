@@ -73,6 +73,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
                 Cells[i][j] = "leer";
             }
         }
+        Cells[3][5] = "Block";
         createBody(5, 10); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
         start(); //Startet das Spiel
@@ -135,8 +136,22 @@ public class Main extends Canvas implements Runnable, KeyListener {
             gr.fillRect((snake.get(i).getx() - 1) * (Cellsize + Spacesize) + Spacesize, (snake.get(i).gety() - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize); //Körper an richtiger Stelle zeichnen
         }
 
-        gr.setColor(Color.RED);
-        gr.fillRect((ax - 1) * (Cellsize + Spacesize) + Spacesize, (ay - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize);
+
+
+
+        for (int i = 0; i < WindowsizeW + 2; i++) {
+            for (int j = 0; j < WindowsizeH + 2; j++) {
+                if(Cells[i][j].equals("Apple")){
+                    gr.setColor(Color.RED);
+                    gr.fillRect((i - 1) * (Cellsize + Spacesize) + Spacesize, (j - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize);
+                }
+                if(Cells[i][j].equals("Block")){
+                    gr.setColor(Color.BLUE);
+                    gr.fillRect((i - 1) * (Cellsize + Spacesize) + Spacesize, (j - 1) * (Cellsize + Spacesize) + Spacesize, Cellsize, Cellsize);
+                }
+
+            }
+        }
     }
 
 
