@@ -7,17 +7,17 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable, KeyListener {
     //Graphic Options
-    private static int WindowsizeW = 25; //Wie viele Zellen es im Fenster gibt
-    private static int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
+    public  int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
-    private static int MaxH = 900; //Wie viele Pixel groß das Fenster sein darf
-    private static int MaxW = 1800; //Wie viele Pixel groß das Fenster sein darf
+    private static int MaxH = 9000; //Wie viele Pixel groß das Fenster sein darf
+    private static int MaxW = 18000; //Wie viele Pixel groß das Fenster sein darf
     private final JFrame frame;
 
     //Gameplay options
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
-    public int speed = 100; //Wie negativ proportional schnell das Spiel ist
+    public int speed = 150; //Wie negativ proportional schnell das Spiel ist
 
     //Debugging stuff
     public static boolean grid = false; //Ob ein Raster angezeigt wird
@@ -25,8 +25,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static boolean CellState = false; //Ob permanent der Status vieler Zellen (bis 20 jeweils?) ausgegeben wird zum debuggen der Zellen selbst
 
 
-    public static int Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
-    public static int Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
+    public int Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
+    public int Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
     public Thread thread; //Der thread der die Hauptmethode ausführt
     public ArrayList<Entity> snake; //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
     public ArrayList<Entity> blocks;
@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public String[][] Cells; //Welchen Zustand die Zellen haben (leer, besetzt, Apfel)
     public Random rand = new Random();
     public Entity Apfel;
-    public Level lvl;
+    public Level lvl = new Level(this);
 
     public Game(JFrame frame) {  //Setup
         this.frame = frame;
@@ -58,6 +58,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         frame.getContentPane().setBackground(new Color(0, 0, 0));
         frame.getContentPane().add(this);
         setFocusable(true); //Ob das Fenster angeklickt werden kann
+        frame.requestFocus();
         addKeyListener(this); //Damit die Knöpfe funktioneren
         snake = new ArrayList<Entity>(3); //Arrayliste
         blocks = new ArrayList<Entity>(0);
@@ -67,10 +68,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 Cells[i][j] = "leer";
             }
         }
-        lvl = new Level(this);
         lvl.doIt();
 
-        createBody(5, 10); //erzeugt ein Körperteil an den Koordinaten x, y
+        createBody(16, 12); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
     }
 
