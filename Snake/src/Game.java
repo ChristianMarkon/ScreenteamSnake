@@ -147,85 +147,87 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     public void run() { //Hauptmethode des Spiels
-        while (running) { //während man noch am leben ist
+        while(true) {
+            if (running) { //während man noch am leben ist
 
 
-            if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
-                for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
-                    for (int j = 1; j < 21; j++) {
-                        switch (Cells[j][i]) {
+                if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
+                    for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
+                        for (int j = 1; j < 21; j++) {
+                            switch (Cells[j][i]) {
 
-                            case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
+                                case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
 
-                            case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
-                            case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
-                            default -> System.out.print("F");
+                                case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
+                                case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
+                                default -> System.out.print("F");
+                            }
+                            System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
                         }
-                        System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
+                        System.out.println(); //Nächste Zeile
                     }
-                    System.out.println(); //Nächste Zeile
+                    System.out.println("next"); //Nächster frame kennzeichnen
                 }
-                System.out.println("next"); //Nächster frame kennzeichnen
-            }
 
 
-            if (direction == "right") { //Richtung in die gegangen wird
-                if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
-                    Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
-                    if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
-                        snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
+                if (direction == "right") { //Richtung in die gegangen wird
+                    if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
+                        Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
+                        if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
+                            snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
+                        } else {
+                            snake.get(0).x++; //ansonsten einfach in die richtung gehen
+                        }
+                        lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
                     } else {
-                        snake.get(0).x++; //ansonsten einfach in die richtung gehen
+                        running = false; //wenn der Kopf blockiert ist, dann Spiel beenden
                     }
-                    lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
-                } else {
-                    running = false; //wenn der Kopf blockiert ist, dann Spiel beenden
                 }
-            }
-            if (direction == "left") {
-                if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple")) {
-                    Move();
-                    if (snake.get(0).x == 1) {
-                        snake.get(0).x = WindowsizeW;
+                if (direction == "left") {
+                    if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple")) {
+                        Move();
+                        if (snake.get(0).x == 1) {
+                            snake.get(0).x = WindowsizeW;
+                        } else {
+                            snake.get(0).x--;
+                        }
+                        lastdir = "left";
                     } else {
-                        snake.get(0).x--;
+                        running = false;
                     }
-                    lastdir = "left";
-                } else {
-                    running = false;
                 }
-            }
-            if (direction == "up") {
-                if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple")) {
-                    Move();
-                    if (snake.get(0).y == 1) {
-                        snake.get(0).y = WindowsizeH;
+                if (direction == "up") {
+                    if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple")) {
+                        Move();
+                        if (snake.get(0).y == 1) {
+                            snake.get(0).y = WindowsizeH;
+                        } else {
+                            snake.get(0).y--;
+                        }
+                        lastdir = "up";
                     } else {
-                        snake.get(0).y--;
+                        running = false;
                     }
-                    lastdir = "up";
-                } else {
-                    running = false;
                 }
-            }
-            if (direction == "down") {
-                if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple")) {
-                    Move();
-                    if (snake.get(0).y == WindowsizeH) {
-                        snake.get(0).y = 1;
+                if (direction == "down") {
+                    if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple")) {
+                        Move();
+                        if (snake.get(0).y == WindowsizeH) {
+                            snake.get(0).y = 1;
+                        } else {
+                            snake.get(0).y++;
+                        }
+                        lastdir = "down";
                     } else {
-                        snake.get(0).y++;
+                        running = false;
                     }
-                    lastdir = "down";
-                } else {
-                    running = false;
                 }
+                if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
+                    Growth = Growth + ApplePower;
+                    createApple();
+                }
+                Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
             }
-            if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
-                Growth = Growth + ApplePower;
-                createApple();
-            }
-            Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
             repaint();//Änderungen anzeigen
             try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
                 thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
@@ -233,6 +235,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 e.printStackTrace();
             }
         }
+
+
     }
 
 
@@ -266,6 +270,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
         }
         if (key == KeyEvent.VK_DOWN && !direction.equals("up") && !lastdir.equals("up")) {
             direction = "down";
+        }
+        if (key == KeyEvent.VK_SPACE) {
+            running = !running;
         }
     }
 
