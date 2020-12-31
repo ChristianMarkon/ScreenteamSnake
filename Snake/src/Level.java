@@ -68,9 +68,68 @@ public class Level {
             AppleEmptyRect(37, 15, 40, 15);
         }
         if (number == 2) {
-            Lines = Arrays.asList(10, 10, 11, 12, 8, 8);
-            DrawLines();
+            emptyRect(9, 2, 10, 2);
+            place(30, 2);
+            place(30, 3);
+            place(30, 4);
+            emptyRect(30, 5, 32, 5);
+            place(7, 4);
+            place(12, 4);
+            place(12, 5);
+            place(12, 5);
+            place(4, 7);
+            place(7, 5);
+            emptyRect(9, 7, 10, 7);
+            place(15, 7);
+            place(5, 8);
+            place(14, 8);
+            emptyRect(21, 8, 28, 8);
+            place(33, 7);
+            place(33, 8);
+            place(6, 9);
+            place(13, 9);
+            emptyRect(24, 9, 25, 9);
+            place(33, 9);
+            place(7, 10);
+            place(12, 10);
+            emptyRect(9, 10, 10, 10);
+            emptyRect(24, 10, 25, 10);
+            emptyRect(9, 11, 10, 11);
+            emptyRect(9, 12, 10, 12);
+            place(30, 12);
+            emptyRect(9, 13, 10, 13);
+            emptyRect(24, 13, 25, 13);
+            place(31, 13);
+            emptyRect(9, 14, 10, 14);
+            emptyRect(24, 14, 25, 14);
+            place(32, 14);
+            emptyRect(19, 15, 21, 15);
+            emptyRect(33, 15, 35, 15);
+            place(36, 14);
+            place(37, 13);
+            place(38, 12);
+            place(8, 16);
+            place(11, 16);
+            emptyRect(27, 16, 29, 16);
+            place(34, 16);
+            place(7, 17);
+            place(12, 17);
+            place(27, 17);
+            place(6, 18);
+            place(13, 18);
+            emptyRect(27, 18, 28, 18);
+            place(5, 19);
+            place(14, 19);
+            place(27, 19);
+            place(4, 20);
+            place(15, 20);
+            emptyRect(27, 20, 29, 20);
+            Deadzone(28, 19);
+            Deadzone(28, 17);
+
         }
+
+
 
     }
 
@@ -94,7 +153,7 @@ public class Level {
 
             }
         }
-
+        Lines.removeAll(Lines);
     }
 
     public void AppleEmptyRect(int x1, int y1, int x2, int y2) {
