@@ -29,8 +29,11 @@ public class Menu extends Panel {
 
         titleNamePanel.setBackground(Color.black);
 
+        game.init();
+        game.start();
 
-        Button startButton = new Button("Start");
+
+       /* Button startButton = new Button("Start");
         this.add(startButton);
         startButton.addActionListener(startGameActionListener);
         startButton.setBackground(new Color(0, 0, 0));
@@ -42,7 +45,7 @@ public class Menu extends Panel {
         frame.add(this);
 
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));*/
 
 
     }
