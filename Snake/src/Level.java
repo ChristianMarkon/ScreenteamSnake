@@ -66,8 +66,9 @@ public class Level {
             AppleEmptyRect(1, 15, 4, 15);
             AppleEmptyRect(37, 10, 40, 10);
             AppleEmptyRect(37, 15, 40, 15);
-        }
-        if (number == 2) {
+
+
+        }if (number == 2) {
             emptyRect(9, 2, 10, 2);
             place(30, 2);
             place(30, 3);
@@ -126,11 +127,63 @@ public class Level {
             emptyRect(27, 20, 29, 20);
             Deadzone(28, 19);
             Deadzone(28, 17);
-
         }
 
 
 
+
+
+        if (number == 3) {
+            emptyRect(5, 10, 5, 7);
+            place(6, 11);
+            place(7, 12);
+            place(6, 6);
+            emptyRect(7, 5, 10, 5);
+            place(11, 6);
+            emptyRect(12, 7, 17, 7);
+            place(18, 6);
+            place(19, 6);
+            place(20, 5);
+            place(20, 4);
+            quer(11, 10, 12, 11);
+            quer(13, 11, 15, 13);
+            quer(16, 13, 17, 14);
+            emptyRect(19, 11, 21, 11);
+            emptyRect(22, 12, 22, 14);
+            emptyRect(21, 15, 21, 18);
+            Lines = Arrays.asList(22, 19, 22, 20, 23);
+            DrawLines();
+            emptyRect(24, 21, 25, 21);
+            quer(26, 20, 30, 16);
+            quer(27, 20, 29, 18);
+            quer(29, 16, 30, 15);
+            place(27, 10);
+            Lines = Arrays.asList(26, 9, 26, 5, 27, 4, 28, 3, 32);
+            DrawLines();
+            emptyRect(33, 4, 34, 7);
+            Lines = Arrays.asList(32, 8, 32, 10, 35);
+            DrawLines();
+            emptyRect(36, 9, 37, 9);
+            emptyRect(38, 10, 38, 13);
+            emptyRect(37, 14, 37, 17);
+            emptyRect(36, 18, 36, 20);
+            place(35, 21);
+            Lines = Arrays.asList(2, 22, 2, 20, 3, 17);
+            DrawLines();
+            emptyRect(4, 16, 5, 16);
+            emptyRect(6, 17, 6, 23);
+            emptyRect(7, 24, 8, 24);
+            quer(9, 23, 11, 21);
+            quer(10, 21, 12, 19);
+            quer(11, 19, 14, 16);
+            quer(13, 16, 14, 15);
+            place(15, 16);
+            emptyRect(16, 17, 16, 22);
+            emptyRect(17, 23, 18, 23);
+            emptyRect(19, 22, 19, 21);
+
+
+        }
     }
 
     public void DrawLines() {
@@ -143,17 +196,43 @@ public class Level {
             place(x, y);
             for (int i = 2; i < Lines.size(); i++) {
                 if (sss) {
-                    emptyRect(x, y, Lines.get(i), y);
-                    x = Lines.get(i);
+                    if(x!=Lines.get(i)) {
+                        emptyRect(x, y, Lines.get(i), y);
+                        x = Lines.get(i);
+                    }
                 } else {
-                    emptyRect(x, y, x, Lines.get(i));
-                    y = Lines.get(i);
+                    if(x!= Lines.get(i)) {
+                        emptyRect(x, y, x, Lines.get(i));
+                        y = Lines.get(i);
+                    }
                 }
                 sss = !sss;
 
             }
         }
-        Lines.removeAll(Lines);
+        Lines = new ArrayList<>();
+    }
+
+    public void quer(int x1, int y1, int x2, int y2){
+        place(x1, y1);
+        if((x2-x1)-(y2-y1)==0||(x2-x1)+(y2-y1)==0) {
+            while(x1-x2!=0){
+                if(x1-x2<0){
+                    x1++;
+                }else{
+                    x1--;
+                }
+                if(y1-y2<0){
+                    y1++;
+                }else{
+                    y1--;
+                }
+                place(x1, y1);
+            }
+
+        }else{
+            System.out.println("quer problem! "+x1+ y1);
+        }
     }
 
     public void AppleEmptyRect(int x1, int y1, int x2, int y2) {

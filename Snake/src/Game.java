@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
     public int speed = 100; //Wie negativ proportional schnell das Spiel ist
     public boolean WandTod = true;
-    public int StartLevel = 2;
+    public int StartLevel = 3;
 
     //Debugging stuff
     public static boolean grid = false; //Ob ein Raster angezeigt wird
