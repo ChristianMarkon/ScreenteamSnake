@@ -334,12 +334,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         }*/
         if (key == KeyEvent.VK_E) {
-            running=true;
-            paused = !paused;
-            frame.getContentPane().revalidate();
-            frame.getContentPane().removeAll();
-
-            frame.setVisible(false);
+           System.exit(0);
 
         }
         if (key == KeyEvent.VK_S) {
