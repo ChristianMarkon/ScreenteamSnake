@@ -50,6 +50,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public boolean paused = false;
     public static String menuP = "leer";
+    public static Graphics gr ;
 
     public Game(JFrame frame) {  //Setup
         this.frame = frame;
@@ -415,7 +416,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         JPanel panel = new JPanel();
         //panel.setBounds(500,500,500,500);
         panel.setBackground(new Color(0,0,0));
-        panel.setSize(100,100);
+        panel.setSize(getParent().getSize());
         panel.setVisible(true);
         panel.setLayout(null);
         frame.getContentPane().revalidate();
@@ -425,6 +426,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         panel.add(label);
         panel.add(label1);
         panel.add(label2);
+        panel.setBorder(BorderFactory.createLineBorder(Color.blue,5));
         frame.add(panel);
 
         KeyEvent ke = new KeyEvent(new Component() {}, 0, 0l, 0, 0);
