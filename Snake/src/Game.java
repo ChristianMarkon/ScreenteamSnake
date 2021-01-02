@@ -1,15 +1,17 @@
 import javax.sound.sampled.Port;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 public class Game extends Canvas implements Runnable, KeyListener {
     //Graphic Options
     public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
-    public int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH = 22; //Wie viele Zellen es im Fenster gibt
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static int MaxH = 9000; //Wie viele Pixel groß das Fenster sein darf
@@ -20,7 +22,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
     public int speed = 100; //Wie negativ proportional schnell das Spiel ist
     public boolean WandTod = true;
-    public int StartLevel = 3;
+    public int StartLevel = 1;
 
     //Debugging stuff
     public static boolean grid = false; //Ob ein Raster angezeigt wird
@@ -46,6 +48,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public Random rand = new Random();
     public Level lvl = new Level(this);
 
+    public boolean paused = false;
+    public static String menuP = "leer";
+
     public Game(JFrame frame) {  //Setup
         this.frame = frame;
     }
@@ -59,10 +64,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
             WindowsizeH--;
             Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
         }
+
         frame.setSize(Width + 16, Height + 39);
         frame.getContentPane().setBackground(new Color(0, 0, 0));
         frame.getContentPane().add(this);
-        setFocusable(true); //Ob das Fenster angeklickt werden kann
+        frame.getContentPane().requestFocusInWindow();
+        frame.getFocusableWindowState();
+        frame.getContentPane();
+
+        //setFocusable(true); //Ob das Fenster angeklickt werden kann
         frame.requestFocus();
         addKeyListener(this); //Damit die Knöpfe funktioneren
         Cells = new String[WindowsizeW + 2][WindowsizeH + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
@@ -71,6 +81,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         createBody(16, 12); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
+
     }
 
 
@@ -162,101 +173,114 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
 
-    public void run() { //Hauptmethode des Spiels
-        while (true) {
-            if (running) { //während man noch am leben ist
+    public void run() {//Hauptmethode des Spiels
+        boolean end = true;
+        while(true) {
+            while (running) {
+                if (!paused) { //während man noch am leben ist
 
+                    if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
+                        for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
+                            for (int j = 1; j < 21; j++) {
+                                switch (Cells[j][i]) {
 
-                if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
-                    for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
-                        for (int j = 1; j < 21; j++) {
-                            switch (Cells[j][i]) {
+                                    case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
 
-                                case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
-
-                                case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
-                                case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
-                                case "Block" -> System.out.println("H");
-                                default -> System.out.print("F");
+                                    case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
+                                    case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
+                                    case "Block" -> System.out.println("H");
+                                    default -> System.out.print("F");
+                                }
+                                System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
                             }
-                            System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
+                            System.out.println(); //Nächste Zeile
                         }
-                        System.out.println(); //Nächste Zeile
+                        System.out.println("next"); //Nächster frame kennzeichnen
                     }
-                    System.out.println("next"); //Nächster frame kennzeichnen
-                }
 
 
-                if (direction == "right") { //Richtung in die gegangen wird
-                    if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Dead")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
-                        Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
-                        if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
-                            snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
+                    if (direction == "right") { //Richtung in die gegangen wird
+                        if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Dead")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
+                            Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
+                            if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
+                                snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
+                            } else {
+                                snake.get(0).x++; //ansonsten einfach in die richtung gehen
+                            }
+                            lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
                         } else {
-                            snake.get(0).x++; //ansonsten einfach in die richtung gehen
+                            running = false;//wenn der Kopf blockiert ist, dann Spiel beenden
+                            //endMethod();
                         }
-                        lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
-                    } else {
-                        running = false; //wenn der Kopf blockiert ist, dann Spiel beenden
                     }
-                }
-                if (direction == "left") {
-                    if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Dead")) {
-                        Move();
-                        if (snake.get(0).x == 1) {
-                            snake.get(0).x = WindowsizeW;
+                    if (direction == "left") {
+                        if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Dead")) {
+                            Move();
+                            if (snake.get(0).x == 1) {
+                                snake.get(0).x = WindowsizeW;
+                            } else {
+                                snake.get(0).x--;
+                            }
+                            lastdir = "left";
                         } else {
-                            snake.get(0).x--;
+                            running = false;
+                            // endMethod();
                         }
-                        lastdir = "left";
-                    } else {
-                        running = false;
                     }
-                }
-                if (direction == "up") {
-                    if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Dead")) {
-                        Move();
-                        if (snake.get(0).y == 1) {
-                            snake.get(0).y = WindowsizeH;
+                    if (direction == "up") {
+                        if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Dead")) {
+                            Move();
+                            if (snake.get(0).y == 1) {
+                                snake.get(0).y = WindowsizeH;
+                            } else {
+                                snake.get(0).y--;
+                            }
+                            lastdir = "up";
                         } else {
-                            snake.get(0).y--;
+                            running = false;
+                            // endMethod();
                         }
-                        lastdir = "up";
-                    } else {
-                        running = false;
                     }
-                }
-                if (direction == "down") {
-                    if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Dead")) {
-                        Move();
-                        if (snake.get(0).y == WindowsizeH) {
-                            snake.get(0).y = 1;
+                    if (direction == "down") {
+                        if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Dead")) {
+                            Move();
+                            if (snake.get(0).y == WindowsizeH) {
+                                snake.get(0).y = 1;
+                            } else {
+                                snake.get(0).y++;
+                            }
+                            lastdir = "down";
                         } else {
-                            snake.get(0).y++;
-                        }
-                        lastdir = "down";
-                    } else {
-                        running = false;
-                    }
-                }
-                if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
-                    Growth = Growth + ApplePower;
-                    createApple();
-                    for (int i = 0; i < Apfel.size(); i++) {
-                        if (Apfel.get(i).x == snake.get(0).x && Apfel.get(i).y == snake.get(0).y) {
-                            Apfel.remove(i);
+                            running = false;
+                            // endMethod();
                         }
                     }
-                }
-                Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
+                    if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
+                        Growth = Growth + ApplePower;
+                        createApple();
+                        for (int i = 0; i < Apfel.size(); i++) {
+                            if (Apfel.get(i).x == snake.get(0).x && Apfel.get(i).y == snake.get(0).y) {
+                                Apfel.remove(i);
+                            }
+                        }
+                    }
+                    Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
 
-                repaint();//Änderungen anzeigen
+                    repaint();//Änderungen anzeigen
+                }
+
+                try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
+                    thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
-                thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (end  == true)
+            {
+                endMethod();
+                end = false;
             }
+
         }
 
 
@@ -295,8 +319,21 @@ public class Game extends Canvas implements Runnable, KeyListener {
             direction = "down";
         }
         if (key == KeyEvent.VK_SPACE) {
-            running = !running;
+            paused = !paused;
+
         }
+
+        if (!menuP.equals("leer") ) {
+            if (key == KeyEvent.VK_S) {
+                //starting
+
+            }
+            if (key == KeyEvent.VK_E) {
+                frame.setVisible(false);
+            }
+
+        }
+
     }
 
 
@@ -307,6 +344,18 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) { //äh?
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_E) {
+            running=true;
+            paused = !paused;
+            frame.getContentPane().revalidate();
+            frame.getContentPane().removeAll();
+            /*repaint();
+            thread.start();*/
+            //frame.setVisible(false);
+
+        }
     }
 
     public void createBody(int X, int Y) { //hiermit erzeugt man ein neues Objekt des typs "Body". damit mach ich neue körperteile wenn die schlange wachsen soll
@@ -326,5 +375,67 @@ public class Game extends Canvas implements Runnable, KeyListener {
             Apfel.add(new Entity("Apple", ax, ay));
             SpawnApples--;
         } while (SpawnApples > 0);
+    }
+
+    public void endMethod()
+    {
+
+        JLabel label = new JLabel("You Lost !!");
+        label.setForeground(new Color(255,255,255));
+        //label.setBackground(Color.pink);
+        label.setSize(100,100);
+        label.setLayout(null);
+        label.setVisible(true);
+        label.setBounds(450,300,200,100);
+        label.setFont(new Font("DialogInput" ,Font.BOLD,20));
+
+        JLabel label1 = new JLabel("To start the game please press S");
+        label1.setForeground(new Color(255,255,255));
+        //label.setBackground(Color.pink);
+        label1.setSize(100,100);
+        label1.setLayout(null);
+        label1.setVisible(true);
+        label1.setBounds(700,300,500,100);
+        label1.setFont(new Font("DialogInput" ,Font.BOLD,20));
+
+        JLabel label2 = new JLabel("To end the Game Press E");
+        label2.setForeground(new Color(255,255,255));
+        //label.setBackground(Color.pink);
+        label2.setSize(100,100);
+        label2.setLayout(null);
+        label2.setVisible(true);
+        label2.setBounds(700,350,500,100);
+        label2.setFont(new Font("DialogInput" ,Font.BOLD,20));
+
+
+
+
+        JPanel panel = new JPanel();
+        //panel.setBounds(500,500,500,500);
+        panel.setBackground(new Color(0,0,0));
+        panel.setSize(100,100);
+        panel.setVisible(true);
+        panel.setLayout(null);
+        frame.getContentPane().revalidate();
+        frame.getContentPane().removeAll();
+
+       // String menuP = "a";
+        panel.add(label);
+        panel.add(label1);
+        panel.add(label2);
+        frame.add(panel);
+
+        /*KeyEvent ke = new KeyEvent(new Component() {}, 0, 0l, 0, 0);
+        addKeyListener(this);
+        int key = ke.getKeyCode();
+        if (key == KeyEvent.VK_S)
+        {
+
+        }
+
+        this.keyTyped(ke);*/
+
+
+
     }
 }
