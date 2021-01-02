@@ -323,7 +323,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         }
 
-        if (!menuP.equals("leer") ) {
+        /*if (!menuP.equals("leer") ) {
             if (key == KeyEvent.VK_S) {
                 //starting
 
@@ -331,6 +331,24 @@ public class Game extends Canvas implements Runnable, KeyListener {
             if (key == KeyEvent.VK_E) {
                 frame.setVisible(false);
             }
+
+        }*/
+        if (key == KeyEvent.VK_E) {
+            running=true;
+            paused = !paused;
+            frame.getContentPane().revalidate();
+            frame.getContentPane().removeAll();
+
+            frame.setVisible(false);
+
+        }
+        if (key == KeyEvent.VK_S) {
+            running=true;
+            paused = !paused;
+            frame.getContentPane().revalidate();
+            frame.getContentPane().removeAll();
+
+            frame.setVisible(false);
 
         }
 
@@ -344,18 +362,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) { //äh?
-        int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_E) {
-            running=true;
-            paused = !paused;
-            frame.getContentPane().revalidate();
-            frame.getContentPane().removeAll();
-            /*repaint();
-            thread.start();*/
-            //frame.setVisible(false);
-
-        }
     }
 
     public void createBody(int X, int Y) { //hiermit erzeugt man ein neues Objekt des typs "Body". damit mach ich neue körperteile wenn die schlange wachsen soll
@@ -425,15 +432,18 @@ public class Game extends Canvas implements Runnable, KeyListener {
         panel.add(label2);
         frame.add(panel);
 
-        /*KeyEvent ke = new KeyEvent(new Component() {}, 0, 0l, 0, 0);
-        addKeyListener(this);
+        KeyEvent ke = new KeyEvent(new Component() {}, 0, 0l, 0, 0);
+        frame.addKeyListener(this);
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_S)
         {
-
+            this.keyPressed(new KeyEvent(new Component() {}, 0, 0l, 0, key));
+        }
+        if (key == KeyEvent.VK_E)
+        {
+            this.keyPressed(new KeyEvent(new Component() {}, 0, 0l, 0, key));
         }
 
-        this.keyTyped(ke);*/
 
 
 
