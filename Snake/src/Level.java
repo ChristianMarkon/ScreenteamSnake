@@ -7,6 +7,7 @@ public class Level {
     List<Entity> Delete = new ArrayList<>();
     List<Integer> Lines = new ArrayList<>();
     Entity start;
+    int Req;
 
     public Level(Game g) {
         gam = g;
@@ -15,6 +16,7 @@ public class Level {
     public void doIt(int number) {
         clear();
         start = new Entity(3, 4);
+        Req = 10;
         if (gam.WandTod) {
             emptyRect(0, 0, gam.WindowsizeW + 1, gam.WindowsizeH + 1);
         }
@@ -68,9 +70,11 @@ public class Level {
             AppleEmptyRect(1, 15, 4, 15);
             AppleEmptyRect(37, 10, 40, 10);
             AppleEmptyRect(37, 15, 40, 15);
+            start = new Entity(17, 12);
+            Req = 20;
 
-
-        }if (number == 2) {
+        }
+        if (number == 2) {
             emptyRect(9, 2, 10, 2);
             place(30, 2);
             place(30, 3);
@@ -129,10 +133,8 @@ public class Level {
             emptyRect(27, 20, 29, 20);
             Deadzone(28, 19);
             Deadzone(28, 17);
+            start = new Entity(11, 12);
         }
-
-
-
 
 
         if (number == 3) {
@@ -183,7 +185,44 @@ public class Level {
             emptyRect(16, 17, 16, 22);
             emptyRect(17, 23, 18, 23);
             emptyRect(19, 22, 19, 21);
+        }
+        if (number == 4) {
+            fillRect(3, 4, 5, 6);
+            place(3, 3);
+            emptyRect(14, 21, 19, 24);
+            delEmptyRect(15, 21, 19, 21);
+            Lines = Arrays.asList(4, 9, 4, 12, 7, 15, 11);
+            DrawLines();
+            emptyRect(11,3,11,6);
+            emptyRect(17,3,23,3);
+            emptyRect(34,2,35,3);
+            emptyRect(15,7,16,8);
+            Lines = Arrays.asList(27,6,31,11);
+            DrawLines();
+            emptyRect(25,9,27,10);
+            emptyRect(35,7,39,8);
+            fillRect(19,12,21,14);
+            Lines = Arrays.asList(17,18,21,15);
+            DrawLines();
+            emptyRect(29,13,29,15);
+            place(30,15);
+            fillRect(35,14,37,16);
+            place(7,19);
+            Lines = Arrays.asList(8,20,6,23,8,24);
+            DrawLines();
+            Lines = Arrays.asList(24,21,24,23,28,20);
+            DrawLines();
+            emptyRect(32,21,34,22);
 
+            start = new Entity(6, 7);
+
+        }
+
+        if(number==11){
+            fillRect(1, 1, 40, 25);
+            delFillRect(8,3,15,5);
+            delFillRect(11, );
+            start = new Entity(3,16);
 
         }
     }
@@ -198,12 +237,12 @@ public class Level {
             place(x, y);
             for (int i = 2; i < Lines.size(); i++) {
                 if (sss) {
-                    if(x!=Lines.get(i)) {
+                    if (x != Lines.get(i)) {
                         emptyRect(x, y, Lines.get(i), y);
                         x = Lines.get(i);
                     }
                 } else {
-                    if(x!= Lines.get(i)) {
+                    if (x != Lines.get(i)) {
                         emptyRect(x, y, x, Lines.get(i));
                         y = Lines.get(i);
                     }
@@ -215,25 +254,25 @@ public class Level {
         Lines = new ArrayList<>();
     }
 
-    public void quer(int x1, int y1, int x2, int y2){
+    public void quer(int x1, int y1, int x2, int y2) {
         place(x1, y1);
-        if((x2-x1)-(y2-y1)==0||(x2-x1)+(y2-y1)==0) {
-            while(x1-x2!=0){
-                if(x1-x2<0){
+        if ((x2 - x1) - (y2 - y1) == 0 || (x2 - x1) + (y2 - y1) == 0) {
+            while (x1 - x2 != 0) {
+                if (x1 - x2 < 0) {
                     x1++;
-                }else{
+                } else {
                     x1--;
                 }
-                if(y1-y2<0){
+                if (y1 - y2 < 0) {
                     y1++;
-                }else{
+                } else {
                     y1--;
                 }
                 place(x1, y1);
             }
 
-        }else{
-            System.out.println("quer problem! "+x1+ y1);
+        } else {
+            System.out.println("quer problem! " + x1 + y1);
         }
     }
 
@@ -284,6 +323,28 @@ public class Level {
 
     }
 
+    public void fillRect(int x1, int y1, int x2, int y2) {
+        if (x2 < x1) {
+            int X = x2;
+            x2 = x1;
+            x1 = X;
+        }
+        if (y2 < y1) {
+            int Y = y2;
+            y2 = y1;
+            y1 = Y;
+        }
+
+        for (int i = x1; i <= x2; i++) {
+            for (int j = y1; j <= y2; j++) {
+                place(i, j);
+
+            }
+        }
+
+
+    }
+
     public void delEmptyRect(int x1, int y1, int x2, int y2) {
 
         for (int i = x1; i <= x2; i++) {
@@ -300,6 +361,28 @@ public class Level {
                 }
             }
         }
+
+    }
+
+    public void delFillRect(int x1, int y1, int x2, int y2) {
+        if (x2 < x1) {
+            int X = x2;
+            x2 = x1;
+            x1 = X;
+        }
+        if (y2 < y1) {
+            int Y = y2;
+            y2 = y1;
+            y1 = Y;
+        }
+
+        for (int i = x1; i <= x2; i++) {
+            for (int j = y1; j <= y2; j++) {
+                del(i, j);
+
+            }
+        }
+
 
     }
 

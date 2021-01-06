@@ -15,7 +15,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
     public int speed = 100; //Wie negativ proportional schnell das Spiel ist
     public boolean WandTod = true;
-    public int StartLevel = 0;
+    public int CurrentLevel;
+
 
     //Debugging stuff
     public static boolean grid = false; //Ob ein Raster angezeigt wird
@@ -64,7 +65,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         frame.requestFocus();
     }
 
-    public void init() {
+    public void init(int Lev) {
        /* while (Width > MaxW) {
             WindowsizeW--;
             Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
@@ -73,6 +74,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             WindowsizeH--;
             Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
         }*/
+        CurrentLevel = Lev;
         snake = new ArrayList<Entity>(0); //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
         blocks = new ArrayList<Entity>(0);
         Apfel = new ArrayList<Entity>(0);
@@ -93,7 +95,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         //setFocusable(true); //Ob das Fenster angeklickt werden kann
         frame.requestFocus();
         Cells = new String[WindowsizeW + 2][WindowsizeH + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
-        lvl.doIt(StartLevel);
+        lvl.doIt(Lev);
         createBody(lvl.start.getx(), lvl.start.gety()); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
         frame.requestFocus();
@@ -193,6 +195,9 @@ gr.drawString("Fuck this", 100, 100);*/
 
         while (true) {
                 if (!paused&&running) { //während man noch am leben ist
+                    if(lvl.Req<=snake.size()){
+                        init(CurrentLevel+1);
+                    }
 
                     if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
                         for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
@@ -338,13 +343,13 @@ gr.drawString("Fuck this", 100, 100);*/
 
         }
 
-            if (key == KeyEvent.VK_E) {
+            if (key == KeyEvent.VK_ESCAPE) {
                 System.exit(0);
 
             }
-            if (key == KeyEvent.VK_S) {
+            if (key == KeyEvent.VK_R) {
 
-                init();
+                init(CurrentLevel);
 
             }
 
@@ -392,7 +397,7 @@ gr.drawString("Fuck this", 100, 100);*/
         label.setBounds(450, 300, 200, 100);
         label.setFont(new Font("DialogInput", Font.BOLD, 20));
 
-        JLabel label1 = new JLabel("To start the game please press S");
+        JLabel label1 = new JLabel("To start the game please press R");
         label1.setForeground(new Color(255, 255, 255));
         //label.setBackground(Color.pink);
         label1.setSize(100, 100);
@@ -401,7 +406,7 @@ gr.drawString("Fuck this", 100, 100);*/
         label1.setBounds(700, 300, 500, 100);
         label1.setFont(new Font("DialogInput", Font.BOLD, 20));
 
-        JLabel label2 = new JLabel("To end the Game Press E");
+        JLabel label2 = new JLabel("To end the Game Press Esc");
         label2.setForeground(new Color(255, 255, 255));
         //label.setBackground(Color.pink);
         label2.setSize(100, 100);
@@ -432,11 +437,11 @@ gr.drawString("Fuck this", 100, 100);*/
         }, 0, 0l, 0, 0);
         frame.addKeyListener(this);
         int key = ke.getKeyCode();
-        if (key == KeyEvent.VK_S) {
+        if (key == KeyEvent.VK_R) {
             this.keyPressed(new KeyEvent(new Component() {
             }, 0, 0l, 0, key));
         }
-        if (key == KeyEvent.VK_E) {
+        if (key == KeyEvent.VK_ESCAPE) {
             this.keyPressed(new KeyEvent(new Component() {
             }, 0, 0l, 0, key));
         }

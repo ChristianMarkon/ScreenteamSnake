@@ -10,10 +10,11 @@ public class Menu extends Panel {
     JFrame frame;
     //Graphic Options
     public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
-    public int WindowsizeH = 22; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static boolean menu = false;
+    public int StartLevel = 4;
 
     public Menu(JFrame Frame) {
         frame = Frame;
@@ -61,7 +62,7 @@ public class Menu extends Panel {
 
     public void startGame() {
         game = new Game(frame, WindowsizeW, WindowsizeH, Cellsize, Spacesize, this);
-        game.init();
+        game.init(StartLevel);
         game.start();
     }
 
