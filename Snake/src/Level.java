@@ -1,4 +1,3 @@
-import java.beans.FeatureDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -220,82 +219,99 @@ public class Level {
         }
 
         if (number == 9) {
-            quer(5,2,3,4);
-            quer(3,6,5,8);
-            quer(6,8,7,7);
-            place(3,5);
-            quer(6,2,7,3);
-            fillRect(11,3,11,7);
-            fillRect(14,3,14,7);
-            fillRect(12,5,13,5);
-            fillRect(18,3,18,8);
-            fillRect(19,3,21,3);
-            fillRect(21,4,21,5);
-            fillRect(19,5,20,5);
-            quer(19,6,21,8);
-            fillRect(26,3,26,8);
-            fillRect(31,2,34,2);
-            fillRect(31,3,31,5);
-            fillRect(32,5,34,5);
-            fillRect(34,6,34,8);
-            fillRect(33,8,31,8);
+            quer(5, 2, 3, 4);
+            quer(3, 6, 5, 8);
+            quer(6, 8, 7, 7);
+            place(3, 5);
+            quer(6, 2, 7, 3);
+            fillRect(11, 3, 11, 7);
+            fillRect(14, 3, 14, 7);
+            fillRect(12, 5, 13, 5);
+            fillRect(18, 3, 18, 8);
+            fillRect(19, 3, 21, 3);
+            fillRect(21, 4, 21, 5);
+            fillRect(19, 5, 20, 5);
+            quer(19, 6, 21, 8);
+            fillRect(26, 3, 26, 8);
+            fillRect(31, 2, 34, 2);
+            fillRect(31, 3, 31, 5);
+            fillRect(32, 5, 34, 5);
+            fillRect(34, 6, 34, 8);
+            fillRect(33, 8, 31, 8);
 
 
-            place(6,15);
-            fillRect(5,16,5,17);
-            fillRect(4,18,4,19);
-            fillRect(3,20,3,20);
-            fillRect(7,16,7,17);
-            fillRect(8,18,8,19);
-            place(9,20);
-            fillRect(5,18,7,18);
-            fillRect(13,15,13,21);
-            fillRect(14,15,15,15);
-            fillRect(14,18,15,18);
-            fillRect(14,21,15,21);
-            fillRect(16,16,16,20);
-            fillRect(20, 12,20,18);
-            place(24,15  );
-            place(21,12);
-            place(21,18);
-            quer(22,12,24,14);
-            quer(22,18,24,16);
+            place(6, 15);
+            fillRect(5, 16, 5, 17);
+            fillRect(4, 18, 4, 19);
+            fillRect(3, 20, 3, 20);
+            fillRect(7, 16, 7, 17);
+            fillRect(8, 18, 8, 19);
+            place(9, 20);
+            fillRect(5, 18, 7, 18);
+            fillRect(13, 15, 13, 21);
+            fillRect(14, 15, 15, 15);
+            fillRect(14, 18, 15, 18);
+            fillRect(14, 21, 15, 21);
+            fillRect(16, 16, 16, 20);
+            fillRect(20, 12, 20, 18);
+            place(24, 15);
+            place(21, 12);
+            place(21, 18);
+            quer(22, 12, 24, 14);
+            quer(22, 18, 24, 16);
 
-            fillRect(27,16,27,20);
-            fillRect(28,21,30,21);
-            fillRect(31,16,31,20);
+            fillRect(27, 16, 27, 20);
+            fillRect(28, 21, 30, 21);
+            fillRect(31, 16, 31, 20);
 
-            fillRect(34,11,34,16);
-            fillRect(35,16,38,16);
+            fillRect(34, 11, 34, 16);
+            fillRect(35, 16, 38, 16);
 
-            Deadzone(6,16);
-            Deadzone(6,17);
-            Deadzone(14,16);
-            Deadzone(14,17);
-            Deadzone(15,16);
-            Deadzone(15,17);
-            Deadzone(14,19);
-            Deadzone(14,20);
-            Deadzone(15,19);
-            Deadzone(14,20);
-            Deadzone(15,20);
-            Deadzone(21,13);
-            Deadzone(21,14);
-            Deadzone(21,15);
-            Deadzone(21,16);
-            Deadzone(21,17);
-            Deadzone(22,13);
-            Deadzone(22,14);
-            Deadzone(22,15);
-            Deadzone(22,16);
-            Deadzone(22,17);
-            Deadzone(23,14);
-            Deadzone(23,15);
-            Deadzone(19,4);
-            Deadzone(20,4);
+            Deadzone(6, 16);
+            Deadzone(6, 17);
+            Deadzone(14, 16);
+            Deadzone(14, 17);
+            Deadzone(15, 16);
+            Deadzone(15, 17);
+            Deadzone(14, 19);
+            Deadzone(14, 20);
+            Deadzone(15, 19);
+            Deadzone(14, 20);
+            Deadzone(15, 20);
+            Deadzone(21, 13);
+            Deadzone(21, 14);
+            Deadzone(21, 15);
+            Deadzone(21, 16);
+            Deadzone(21, 17);
+            Deadzone(22, 13);
+            Deadzone(22, 14);
+            Deadzone(22, 15);
+            Deadzone(22, 16);
+            Deadzone(22, 17);
+            Deadzone(23, 14);
+            Deadzone(23, 15);
+            Deadzone(19, 4);
+            Deadzone(20, 4);
 
 
             start = new Entity(10, 11);
+        }
+        if(number==11){
+            fillRect(1, 1, 40, 25);
+            delFillRect(8,3,15,5);
+            delFillRect(11, 6, 12, 13);
+            delFillRect(3, 9, 6, 18);
+            delFillRect(7,14,7,18);
+            delFillRect(8,14,15,20);
+            delFillRect(16,16,24,17);
+            delFillRect(25,13,31,22);
+            delFillRect(32,13,37,17);
+            delFillRect(29,12,30,9);
+            delFillRect(29,6,36,8);
+            delFillRect(26,3,31,7);
+            delFillRect(21,6,25,7);
+            delFillRect(17,8,22,10);
+            start = new Entity(3,16);
 
         }
 
