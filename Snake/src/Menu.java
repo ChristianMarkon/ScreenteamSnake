@@ -14,7 +14,7 @@ public class Menu extends Panel {
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static boolean menu = false;
-    public int StartLevel = 11;
+    public int StartLevel = 6;
 
     public Menu(JFrame Frame) /*throws IOException*/ {
         frame = Frame;
