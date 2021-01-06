@@ -61,6 +61,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
         Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
         addKeyListener(this); //Damit die Knöpfe funktioneren
+        frame.requestFocus();
     }
 
     public void init() {
@@ -95,6 +96,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         lvl.doIt(StartLevel);
         createBody(lvl.start.getx(), lvl.start.gety()); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
+        frame.requestFocus();
 
     }
 
@@ -165,7 +167,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 }
             }
         }
-
+  /*      gr.setColor(Color.YELLOW);
+gr.drawString("Fuck this", 100, 100);*/
         //Schlangenteile Zeichnen
         gr.setColor(gre);
         for (int i = 0; i < snake.size(); i++) { //Elemente der Arrayliste durchlaufen
@@ -189,8 +192,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public void run() {//Hauptmethode des Spiels
 
         while (true) {
-            while (running) {
-                if (!paused) { //während man noch am leben ist
+                if (!paused&&running) { //während man noch am leben ist
 
                     if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
                         for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
@@ -281,23 +283,23 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
                     repaint();//Änderungen anzeigen
                 }
-
                 try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
                     thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            if (end == true) {
-                end = false;
+            if (end&&!running) {
+                end=false;
                 endMethod();
-
             }
+            }
+
+
 
         }
 
 
-    }
+
 
 
     public void Move() {  //Die Körperteile nachrücken lassen
@@ -336,24 +338,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         }
 
-        /*if (!menuP.equals("leer") ) {
-            if (key == KeyEvent.VK_S) {
-                //starting
-
-            }
             if (key == KeyEvent.VK_E) {
-                frame.setVisible(false);
+                System.exit(0);
+
+            }
+            if (key == KeyEvent.VK_S) {
+
+                init();
+
             }
 
-        }*/
-        if (key == KeyEvent.VK_E) {
-            System.exit(0);
-
-        }
-        if (key == KeyEvent.VK_S) {
-           init();
-
-        }
 
     }
 
@@ -432,6 +426,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         panel.add(label2);
         panel.setBorder(BorderFactory.createLineBorder(Color.blue, 5));
         frame.add(panel);
+        frame.requestFocus();
 
         KeyEvent ke = new KeyEvent(new Component() {
         }, 0, 0l, 0, 0);
