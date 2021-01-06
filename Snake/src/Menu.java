@@ -16,7 +16,7 @@ public class Menu extends Panel {
     private static boolean menu = false;
     public int StartLevel = 4;
 
-    public Menu(JFrame Frame) {
+    public Menu(JFrame Frame) /*throws IOException*/ {
         frame = Frame;
 
         if(menu) {
@@ -27,6 +27,12 @@ public class Menu extends Panel {
 
             titleNamePanel = new JPanel();
             title = new JLabel("Snake");
+
+            /*
+            titleNamePanel = new JPanel();
+            BufferedImage logo = ImageIO.read(new File("./Logo,png"));
+            title = new JLabel(new ImageIcon(logo));
+            */
 
             this.add(titleNamePanel);
             titleNamePanel.add(title);
