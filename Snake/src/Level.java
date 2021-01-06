@@ -221,7 +221,8 @@ public class Level {
         if(number==11){
             fillRect(1, 1, 40, 25);
             delFillRect(8,3,15,5);
-            delFillRect(11, );
+            delFillRect(11, 6, 12, 13);
+            delFillRect(3, 9, );
             start = new Entity(3,16);
 
         }
