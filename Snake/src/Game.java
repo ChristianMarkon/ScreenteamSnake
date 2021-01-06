@@ -9,78 +9,91 @@ import java.util.*;
 import java.util.List;
 
 public class Game extends Canvas implements Runnable, KeyListener {
-    //Graphic Options
-    public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
-    public int WindowsizeH = 22; //Wie viele Zellen es im Fenster gibt
-    private static int Cellsize = 30; //Wie groß die Zellen sind
-    private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
-    private static int MaxH = 9000; //Wie viele Pixel groß das Fenster sein darf
-    private static int MaxW = 18000; //Wie viele Pixel groß das Fenster sein darf
-    private final JFrame frame;
+
 
     //Gameplay options
     public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
     public int speed = 100; //Wie negativ proportional schnell das Spiel ist
     public boolean WandTod = true;
-    public int StartLevel = 1;
+    public int StartLevel = 0;
 
     //Debugging stuff
     public static boolean grid = false; //Ob ein Raster angezeigt wird
     public static boolean spacer = false; //Ob eine Hilfslinie zum zählen der pixel existiert
     public static boolean CellState = false; //Ob permanent der Status vieler Zellen (bis 20 jeweils?) ausgegeben wird zum debuggen der Zellen selbst
-    public static int SpawnApples = 50;
+    public static int SpawnApples;
 
-
-    public int Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
-    public int Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
+    public int WindowsizeW; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH; //Wie viele Zellen es im Fenster gibt
+    private int Cellsize; //Wie groß die Zellen sind
+    private int Spacesize; //Wie groß der Abstand zwischen den Zellen ist
+    public int Width;
+    public int Height; //Wie groß das Fenster tatsächlich ist basierend auf der größe der Zellen und Abständen
+    private final JFrame frame;
+    Menu back;
     public Thread thread; //Der thread der die Hauptmethode ausführt
-    public ArrayList<Entity> snake = new ArrayList<Entity>(0); //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
-    public ArrayList<Entity> blocks = new ArrayList<Entity>(0);
-    public ArrayList<Entity> Apfel = new ArrayList<Entity>(0);
-    public ArrayList<Entity> Portal = new ArrayList<Entity>(0);
+    public ArrayList<Entity> snake; //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
+    public ArrayList<Entity> blocks;
+    public ArrayList<Entity> Apfel;
+    public ArrayList<Entity> Portal;
     Color gre = new Color(0, 255, 32); //Die Farbe der Schlange
-    public int tick = 0; //Nicht verwendet, eventuell zum speichern der Zeit                               FIX
-    public String direction = "right"; //Die richtung in die die Schlange als nächstes geht
-    public String lastdir = "right"; //Die Richtung in die die Schlagen zuletzt gegangen ist
-    public int Growth = 2; //Wie groß die Schlange am Anfang ist, wird auch verwendet für wie viele Teile noch generiert werden sollen nachdem man einen Apfel gegessen hat
+    //public int tick = 0; //Nicht verwendet, eventuell zum speichern der Zeit                               FIX
+    public String direction; //Die richtung in die die Schlange als nächstes geht
+    public String lastdir; //Die Richtung in die die Schlagen zuletzt gegangen ist
+    public int Growth; //Wie groß die Schlange am Anfang ist, wird auch verwendet für wie viele Teile noch generiert werden sollen nachdem man einen Apfel gegessen hat
     public boolean running; //Ob das Spiel weitergeht oder nicht, soll false sein wenn es vorbei ist (man in sich selbst reinläuft)
     public String[][] Cells; //Welchen Zustand die Zellen haben (leer, besetzt, Apfel)
     public Random rand = new Random();
     public Level lvl = new Level(this);
+    boolean end;
 
-    public boolean paused = false;
+    public boolean paused;
     public static String menuP = "leer";
-    public static Graphics gr ;
+    public static Graphics gr;
 
-    public Game(JFrame frame) {  //Setup
+    public Game(JFrame frame, int WsW, int WsH, int Cs, int Ss, Menu b) {  //Setup
+        back = b;
         this.frame = frame;
+        WindowsizeW = WsW; //Wie viele Zellen es im Fenster gibt
+        WindowsizeH = WsH; //Wie viele Zellen es im Fenster gibt
+        Cellsize = Cs; //Wie groß die Zellen sind
+        Spacesize = Ss;
+        Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
+        Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
+        addKeyListener(this); //Damit die Knöpfe funktioneren
     }
 
     public void init() {
-        while (Width > MaxW) {
+       /* while (Width > MaxW) {
             WindowsizeW--;
             Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
         }
         while (Height > MaxH) {
             WindowsizeH--;
             Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
-        }
-
+        }*/
+        snake = new ArrayList<Entity>(0); //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
+        blocks = new ArrayList<Entity>(0);
+        Apfel = new ArrayList<Entity>(0);
+        Portal = new ArrayList<Entity>(0);
+        paused = false;
+        running = true;
+        paused = false;
+        Growth = 2;
+        end = true;
+        direction = "right";
+        lastdir = "right";
+        SpawnApples = 50;
         frame.setSize(Width + 16, Height + 39);
         frame.getContentPane().setBackground(new Color(0, 0, 0));
         frame.getContentPane().add(this);
         frame.getContentPane().requestFocusInWindow();
-        frame.getFocusableWindowState();
         frame.getContentPane();
-
         //setFocusable(true); //Ob das Fenster angeklickt werden kann
         frame.requestFocus();
-        addKeyListener(this); //Damit die Knöpfe funktioneren
         Cells = new String[WindowsizeW + 2][WindowsizeH + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
-
         lvl.doIt(StartLevel);
-
-        createBody(16, 12); //erzeugt ein Körperteil an den Koordinaten x, y
+        createBody(lvl.start.getx(), lvl.start.gety()); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
 
     }
@@ -88,7 +101,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public void start() {
         thread = new Thread(this); //neuer thread. verstehe nicht ganz genau wie das tatsächlich funktioniert.
-        running = true; //das soll laufen (man ist am anfang nicht sofort gestorben
         thread.start(); //der thread soll anfangen seine aufgaben zu machen, das spiel wird jetzt gestartet
     }
 
@@ -114,16 +126,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
         gr.setColor(Color.BLACK);
         for (int i = 0; i < Portal.size(); i++) {
             if (Portal.get(i).x < 1) {
-                gr.fillRect((Portal.get(i).x) * (Cellsize + Spacesize), (Portal.get(i).y - 1) * (Cellsize + Spacesize), Spacesize, Cellsize+Spacesize*2);
+                gr.fillRect((Portal.get(i).x) * (Cellsize + Spacesize), (Portal.get(i).y - 1) * (Cellsize + Spacesize), Spacesize, Cellsize + Spacesize * 2);
             }
             if (Portal.get(i).x > WindowsizeW) {
-                gr.fillRect((Portal.get(i).x-1) * (Cellsize + Spacesize), (Portal.get(i).y - 1) * (Cellsize + Spacesize), Spacesize, Cellsize+Spacesize*2);
+                gr.fillRect((Portal.get(i).x - 1) * (Cellsize + Spacesize), (Portal.get(i).y - 1) * (Cellsize + Spacesize), Spacesize, Cellsize + Spacesize * 2);
             }
             if (Portal.get(i).y < 1) {
-                gr.fillRect((Portal.get(i).x-1) * (Cellsize + Spacesize), (Portal.get(i).y) * (Cellsize + Spacesize), Cellsize+Spacesize*2, Spacesize);
+                gr.fillRect((Portal.get(i).x - 1) * (Cellsize + Spacesize), (Portal.get(i).y) * (Cellsize + Spacesize), Cellsize + Spacesize * 2, Spacesize);
             }
             if (Portal.get(i).y > WindowsizeH) {
-                gr.fillRect((Portal.get(i).x-1) * (Cellsize + Spacesize), (Portal.get(i).y-1) * (Cellsize + Spacesize), Cellsize+Spacesize*2, Spacesize);
+                gr.fillRect((Portal.get(i).x - 1) * (Cellsize + Spacesize), (Portal.get(i).y - 1) * (Cellsize + Spacesize), Cellsize + Spacesize * 2, Spacesize);
             }
         }
 
@@ -175,8 +187,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     public void run() {//Hauptmethode des Spiels
-        boolean end = true;
-        while(true) {
+
+        while (true) {
             while (running) {
                 if (!paused) { //während man noch am leben ist
 
@@ -276,10 +288,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
                     e.printStackTrace();
                 }
             }
-            if (end  == true)
-            {
-                endMethod();
+            if (end == true) {
                 end = false;
+                endMethod();
+
             }
 
         }
@@ -335,16 +347,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         }*/
         if (key == KeyEvent.VK_E) {
-           System.exit(0);
+            System.exit(0);
 
         }
         if (key == KeyEvent.VK_S) {
-            running=true;
-            paused = !paused;
-            frame.getContentPane().revalidate();
-            frame.getContentPane().removeAll();
-
-            frame.setVisible(false);
+           init();
 
         }
 
@@ -380,68 +387,64 @@ public class Game extends Canvas implements Runnable, KeyListener {
         } while (SpawnApples > 0);
     }
 
-    public void endMethod()
-    {
+    public void endMethod() {
 
         JLabel label = new JLabel("You Lost !!");
-        label.setForeground(new Color(255,255,255));
+        label.setForeground(new Color(255, 255, 255));
         //label.setBackground(Color.pink);
-        label.setSize(100,100);
+        label.setSize(100, 100);
         label.setLayout(null);
         label.setVisible(true);
-        label.setBounds(450,300,200,100);
-        label.setFont(new Font("DialogInput" ,Font.BOLD,20));
+        label.setBounds(450, 300, 200, 100);
+        label.setFont(new Font("DialogInput", Font.BOLD, 20));
 
         JLabel label1 = new JLabel("To start the game please press S");
-        label1.setForeground(new Color(255,255,255));
+        label1.setForeground(new Color(255, 255, 255));
         //label.setBackground(Color.pink);
-        label1.setSize(100,100);
+        label1.setSize(100, 100);
         label1.setLayout(null);
         label1.setVisible(true);
-        label1.setBounds(700,300,500,100);
-        label1.setFont(new Font("DialogInput" ,Font.BOLD,20));
+        label1.setBounds(700, 300, 500, 100);
+        label1.setFont(new Font("DialogInput", Font.BOLD, 20));
 
         JLabel label2 = new JLabel("To end the Game Press E");
-        label2.setForeground(new Color(255,255,255));
+        label2.setForeground(new Color(255, 255, 255));
         //label.setBackground(Color.pink);
-        label2.setSize(100,100);
+        label2.setSize(100, 100);
         label2.setLayout(null);
         label2.setVisible(true);
-        label2.setBounds(700,350,500,100);
-        label2.setFont(new Font("DialogInput" ,Font.BOLD,20));
-
-
+        label2.setBounds(700, 350, 500, 100);
+        label2.setFont(new Font("DialogInput", Font.BOLD, 20));
 
 
         JPanel panel = new JPanel();
         //panel.setBounds(500,500,500,500);
-        panel.setBackground(new Color(0,0,0));
+        panel.setBackground(new Color(0, 0, 0));
         panel.setSize(getParent().getSize());
         panel.setVisible(true);
         panel.setLayout(null);
         frame.getContentPane().revalidate();
         frame.getContentPane().removeAll();
 
-       // String menuP = "a";
+        // String menuP = "a";
         panel.add(label);
         panel.add(label1);
         panel.add(label2);
-        panel.setBorder(BorderFactory.createLineBorder(Color.blue,5));
+        panel.setBorder(BorderFactory.createLineBorder(Color.blue, 5));
         frame.add(panel);
 
-        KeyEvent ke = new KeyEvent(new Component() {}, 0, 0l, 0, 0);
+        KeyEvent ke = new KeyEvent(new Component() {
+        }, 0, 0l, 0, 0);
         frame.addKeyListener(this);
         int key = ke.getKeyCode();
-        if (key == KeyEvent.VK_S)
-        {
-            this.keyPressed(new KeyEvent(new Component() {}, 0, 0l, 0, key));
+        if (key == KeyEvent.VK_S) {
+            this.keyPressed(new KeyEvent(new Component() {
+            }, 0, 0l, 0, key));
         }
-        if (key == KeyEvent.VK_E)
-        {
-            this.keyPressed(new KeyEvent(new Component() {}, 0, 0l, 0, key));
+        if (key == KeyEvent.VK_E) {
+            this.keyPressed(new KeyEvent(new Component() {
+            }, 0, 0l, 0, key));
         }
-
-
 
 
     }

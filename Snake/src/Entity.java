@@ -11,7 +11,12 @@ public class Entity {
         x=X;
         y=Y;
     }
-    //jgfhofjdshgpo
+
+    Entity( int X, int Y){
+        x=X;
+        y=Y;
+        type="unimportant";
+    }
 
     public int getx(){
         return x;

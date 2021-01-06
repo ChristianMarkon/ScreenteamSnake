@@ -6,6 +6,7 @@ public class Level {
     Game gam;
     List<Entity> Delete = new ArrayList<>();
     List<Integer> Lines = new ArrayList<>();
+    Entity start;
 
     public Level(Game g) {
         gam = g;
@@ -13,6 +14,7 @@ public class Level {
 
     public void doIt(int number) {
         clear();
+        start = new Entity(3, 4);
         if (gam.WandTod) {
             emptyRect(0, 0, gam.WindowsizeW + 1, gam.WindowsizeH + 1);
         }

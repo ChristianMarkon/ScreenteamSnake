@@ -6,34 +6,39 @@ public class Menu extends Panel {
 
     JPanel titleNamePanel;
     JLabel title;
+    Game game;
+    JFrame frame;
+    //Graphic Options
+    public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH = 22; //Wie viele Zellen es im Fenster gibt
+    private static int Cellsize = 30; //Wie groß die Zellen sind
+    private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
+    private static boolean menu = false;
+
+    public Menu(JFrame Frame) {
+        frame = Frame;
+
+        if(menu) {
+            StartGameActionListener startGameActionListener = new StartGameActionListener(this);
+
+            Font titlesFont = new Font("Arial", Font.BOLD, 50);
+            Font buttonsFont = new Font("Arial", Font.PLAIN, 20);
+
+            titleNamePanel = new JPanel();
+            title = new JLabel("Snake");
+
+            this.add(titleNamePanel);
+            titleNamePanel.add(title);
+
+            title.setForeground(new Color(0, 255, 32));
+            title.setFont(titlesFont);
+
+            titleNamePanel.setBackground(Color.black);
 
 
-    public Menu(JFrame frame) {
-        frame.setSize(400  , 400);
-        frame.setBackground(new Color(0, 0, 0));
-        Game game = new Game(frame);
-        Font titlesFont = new Font("Arial", Font.BOLD, 50);
-        Font buttonsFont = new Font("Arial", Font.PLAIN, 20);
 
 
-        StartGameActionListener startGameActionListener = new StartGameActionListener(game, this);
-
-        titleNamePanel = new JPanel();
-        title = new JLabel("Snake");
-
-        this.add(titleNamePanel);
-        titleNamePanel.add(title);
-
-        title.setForeground(new Color(0, 255, 32));
-        title.setFont(titlesFont);
-
-        titleNamePanel.setBackground(Color.black);
-
-        game.init();
-        game.start();
-
-
-       /* Button startButton = new Button("Start");
+       Button startButton = new Button("Start");
         this.add(startButton);
         startButton.addActionListener(startGameActionListener);
         startButton.setBackground(new Color(0, 0, 0));
@@ -45,9 +50,19 @@ public class Menu extends Panel {
         frame.add(this);
 
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));*/
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        }else{
+            startGame();
+        }
 
 
+    }
+
+    public void startGame() {
+        game = new Game(frame, WindowsizeW, WindowsizeH, Cellsize, Spacesize, this);
+        game.init();
+        game.start();
     }
 
 }
