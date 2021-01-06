@@ -222,7 +222,17 @@ public class Level {
             fillRect(1, 1, 40, 25);
             delFillRect(8,3,15,5);
             delFillRect(11, 6, 12, 13);
-            delFillRect(3, 9, );
+            delFillRect(3, 9, 6, 18);
+            delFillRect(7,14,7,18);
+            delFillRect(8,14,15,20);
+            delFillRect(16,16,24,17);
+            delFillRect(25,13,31,22);
+            delFillRect(32,13,37,17);
+            delFillRect(29,12,30,9);
+            delFillRect(29,6,36,8);
+            delFillRect(26,3,31,7);
+            delFillRect(21,6,25,7);
+            delFillRect(17,8,22,10);
             start = new Entity(3,16);
 
         }
