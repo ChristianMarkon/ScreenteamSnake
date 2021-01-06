@@ -53,6 +53,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static Graphics gr;
 
     public Game(JFrame frame, int WsW, int WsH, int Cs, int Ss, Menu b) {  //Setup
+        frame.requestFocus();
         back = b;
         this.frame = frame;
         WindowsizeW = WsW; //Wie viele Zellen es im Fenster gibt
@@ -62,7 +63,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
         Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
         addKeyListener(this); //Damit die Knöpfe funktioneren
-        frame.requestFocus();
+
     }
 
     public void init(int Lev) {
@@ -98,7 +99,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         lvl.doIt(Lev);
         createBody(lvl.start.getx(), lvl.start.gety()); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
-        frame.requestFocus();
+
 
     }
 

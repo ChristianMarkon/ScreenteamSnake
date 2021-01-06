@@ -1,3 +1,4 @@
+import java.beans.FeatureDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -218,13 +219,178 @@ public class Level {
 
         }
 
-        if(number==11){
-            fillRect(1, 1, 40, 25);
-            delFillRect(8,3,15,5);
-            delFillRect(11, );
-            start = new Entity(3,16);
+        if (number == 9) {
+            quer(5,2,3,4);
+            quer(3,6,5,8);
+            quer(6,8,7,7);
+            place(3,5);
+            quer(6,2,7,3);
+            fillRect(11,3,11,7);
+            fillRect(14,3,14,7);
+            fillRect(12,5,13,5);
+            fillRect(18,3,18,8);
+            fillRect(19,3,21,3);
+            fillRect(21,4,21,5);
+            fillRect(19,5,20,5);
+            quer(19,6,21,8);
+            fillRect(26,3,26,8);
+            fillRect(31,2,34,2);
+            fillRect(31,3,31,5);
+            fillRect(32,5,34,5);
+            fillRect(34,6,34,8);
+            fillRect(33,8,31,8);
+
+
+            place(6,15);
+            fillRect(5,16,5,17);
+            fillRect(4,18,4,19);
+            fillRect(3,20,3,20);
+            fillRect(7,16,7,17);
+            fillRect(8,18,8,19);
+            place(9,20);
+            fillRect(5,18,7,18);
+            fillRect(13,15,13,21);
+            fillRect(14,15,15,15);
+            fillRect(14,18,15,18);
+            fillRect(14,21,15,21);
+            fillRect(16,16,16,20);
+            fillRect(20, 12,20,18);
+            place(24,15  );
+            place(21,12);
+            place(21,18);
+            quer(22,12,24,14);
+            quer(22,18,24,16);
+
+            fillRect(27,16,27,20);
+            fillRect(28,21,30,21);
+            fillRect(31,16,31,20);
+
+            fillRect(34,11,34,16);
+            fillRect(35,16,38,16);
+
+            Deadzone(6,16);
+            Deadzone(6,17);
+            Deadzone(14,16);
+            Deadzone(14,17);
+            Deadzone(15,16);
+            Deadzone(15,17);
+            Deadzone(14,19);
+            Deadzone(14,20);
+            Deadzone(15,19);
+            Deadzone(14,20);
+            Deadzone(15,20);
+            Deadzone(21,13);
+            Deadzone(21,14);
+            Deadzone(21,15);
+            Deadzone(21,16);
+            Deadzone(21,17);
+            Deadzone(22,13);
+            Deadzone(22,14);
+            Deadzone(22,15);
+            Deadzone(22,16);
+            Deadzone(22,17);
+            Deadzone(23,14);
+            Deadzone(23,15);
+            Deadzone(19,4);
+            Deadzone(20,4);
+
+
+            start = new Entity(10, 11);
 
         }
+
+        if(number==10)
+        {
+
+            emptyRect(4,3,7,6);
+            delEmptyRect(7,4,7,5);
+            emptyRect(4,6,7,9);
+            delEmptyRect(4,7,4,8);
+
+            quer(12,6,11,7);
+            quer(11,8,10,9);
+            quer(10,10,9,11);
+            fillRect(13,7,13,7);
+            quer(13,8,14,9);
+            quer(14,10,15,11);
+            fillRect(11,9,13,9);
+
+            fillRect(17,2,17,8);
+            fillRect(20,2,20,8);
+            fillRect(18,5,19,5);
+
+            quer(25,6,24,7);
+            quer(24,8,23,9);
+            quer(23,10,22,11);
+            fillRect(26,7,26,7);
+            quer(26,8,27,9);
+            quer(27,10,28,11);
+            fillRect(24,9,26,9);
+
+            fillRect(30,2,30,7);
+            fillRect(34,2,34,7);
+            quer(31,3,32,4);
+            quer(32,5,33,6);
+            place(31,2);
+            place(33,7);
+
+            fillRect(37,6,37,11);
+
+            emptyRect(5,14,8,20);
+            del(8,20);
+            del(8,14);
+            fillRect(6,17,7,17);
+
+            fillRect(14,18,14,22);
+            fillRect(15,22,17,23);
+            fillRect(18,18,18,22);
+            fillRect(15,17,17,17);
+
+            fillRect(24,15,24,22);
+            quer(25,18,28,15);
+            quer(25,19,28,22);
+
+            fillRect(33,13,33,20);
+
+            Deadzone(12,7);
+            Deadzone(12,8);
+            Deadzone(25,7);
+            Deadzone(25,8);
+            Deadzone(31,4);
+            Deadzone(31,5);
+            Deadzone(33,5);
+            Deadzone(33,4);
+            Deadzone(6,15);
+            Deadzone(6,16);
+            Deadzone(7,15);
+            Deadzone(7,16);
+            Deadzone(6,18);
+            Deadzone(6,19);
+            Deadzone(7,18);
+            Deadzone(7,19);
+            Deadzone(15,18);
+            Deadzone(15,19);
+            Deadzone(15,20);
+            Deadzone(15,21);
+            Deadzone(16,18);
+            Deadzone(16,19);
+            Deadzone(16,20);
+            Deadzone(16,21);
+            Deadzone(17,18);
+            Deadzone(17,19);
+            Deadzone(17,20);
+            Deadzone(17,21);
+            Deadzone(25,17);
+            Deadzone(25,20);
+
+
+            start = new Entity(3,12);
+
+        }
+
+
+
+
     }
 
     public void DrawLines() {
