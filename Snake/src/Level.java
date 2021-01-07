@@ -66,10 +66,10 @@ public class Level {
             del(40, 15);
             delEmptyRect(0, 12, 0, 13);
             delEmptyRect(41, 12, 41, 13);
-            AppleEmptyRect(1, 10, 4, 10);
-            AppleEmptyRect(1, 15, 4, 15);
-            AppleEmptyRect(37, 10, 40, 10);
-            AppleEmptyRect(37, 15, 40, 15);
+            deadEmptyRect(1, 10, 4, 10);
+            deadEmptyRect(1, 15, 4, 15);
+            deadEmptyRect(37, 10, 40, 10);
+            deadEmptyRect(37, 15, 40, 15);
             start = new Entity(17, 12);
             Req = 250;
 
@@ -131,8 +131,8 @@ public class Level {
             place(4, 20);
             place(15, 20);
             emptyRect(27, 20, 29, 20);
-            Deadzone(28, 19);
-            Deadzone(28, 17);
+            deadzone(28, 19);
+            deadzone(28, 17);
             delEmptyRect(0,0,41,26);
             start = new Entity(11, 12);
         }
@@ -287,11 +287,9 @@ public class Level {
             emptyRect(28, 24, 31, 24);
             place(32, 23);
             place(33, 23);
-            Deadzone(12, 5);
-            Deadzone(14, 3);
-            Deadzone(16, 3);
-            Deadzone(19, 6);
-            Deadzone(23, 22);
+            deadFillRect(12, 5, 18, 4);
+            deadzone(14,3);
+            deadzone(16, 3);
             delEmptyRect(0,0,41,26);
             start = new Entity(24, 4);
         }
@@ -404,40 +402,40 @@ public class Level {
             place(11, 22);
             place(12, 23);
             place(13, 24);
-            Deadzone(11, 11);
-            Deadzone(12, 11);
-            Deadzone(13, 12);
-            Deadzone(14, 12);
-            Deadzone(15, 13);
-            Deadzone(8, 18);
-            Deadzone(9, 19);
-            Deadzone(12, 16);
-            Deadzone(12, 17);
-            Deadzone(13, 17);
-            Deadzone(13, 18);
-            Deadzone(14, 6);
-            Deadzone(15, 6);
-            Deadzone(16, 6);
-            Deadzone(14, 7);
-            Deadzone(15, 7);
-            Deadzone(16, 7);
-            Deadzone(17, 7);
-            Deadzone(15, 8);
-            Deadzone(16, 8);
-            Deadzone(17, 8);
-            Deadzone(18, 8);
-            Deadzone(17, 9);
-            Deadzone(18, 9);
-            Deadzone(19, 9);
-            Deadzone(18, 10);
-            Deadzone(19, 10);
-            Deadzone(20, 10);
-            Deadzone(19, 11);
-            Deadzone(20, 11);
-            Deadzone(20, 12);
-            Deadzone(20, 13);
-            Deadzone(21, 14);
-            Deadzone(21, 15);
+            deadzone(11, 11);
+            deadzone(12, 11);
+            deadzone(13, 12);
+            deadzone(14, 12);
+            deadzone(15, 13);
+            deadzone(8, 18);
+            deadzone(9, 19);
+            deadzone(12, 16);
+            deadzone(12, 17);
+            deadzone(13, 17);
+            deadzone(13, 18);
+            deadzone(14, 6);
+            deadzone(15, 6);
+            deadzone(16, 6);
+            deadzone(14, 7);
+            deadzone(15, 7);
+            deadzone(16, 7);
+            deadzone(17, 7);
+            deadzone(15, 8);
+            deadzone(16, 8);
+            deadzone(17, 8);
+            deadzone(18, 8);
+            deadzone(17, 9);
+            deadzone(18, 9);
+            deadzone(19, 9);
+            deadzone(18, 10);
+            deadzone(19, 10);
+            deadzone(20, 10);
+            deadzone(19, 11);
+            deadzone(20, 11);
+            deadzone(20, 12);
+            deadzone(20, 13);
+            deadzone(21, 14);
+            deadzone(21, 15);
             start = new Entity(25, 6);
             delEmptyRect(0,0,41,26);
         }
@@ -491,31 +489,31 @@ public class Level {
             fillRect(34, 11, 34, 16);
             fillRect(35, 16, 38, 16);
 
-            Deadzone(6, 16);
-            Deadzone(6, 17);
-            Deadzone(14, 16);
-            Deadzone(14, 17);
-            Deadzone(15, 16);
-            Deadzone(15, 17);
-            Deadzone(14, 19);
-            Deadzone(14, 20);
-            Deadzone(15, 19);
-            Deadzone(14, 20);
-            Deadzone(15, 20);
-            Deadzone(21, 13);
-            Deadzone(21, 14);
-            Deadzone(21, 15);
-            Deadzone(21, 16);
-            Deadzone(21, 17);
-            Deadzone(22, 13);
-            Deadzone(22, 14);
-            Deadzone(22, 15);
-            Deadzone(22, 16);
-            Deadzone(22, 17);
-            Deadzone(23, 14);
-            Deadzone(23, 15);
-            Deadzone(19, 4);
-            Deadzone(20, 4);
+            deadzone(6, 16);
+            deadzone(6, 17);
+            deadzone(14, 16);
+            deadzone(14, 17);
+            deadzone(15, 16);
+            deadzone(15, 17);
+            deadzone(14, 19);
+            deadzone(14, 20);
+            deadzone(15, 19);
+            deadzone(14, 20);
+            deadzone(15, 20);
+            deadzone(21, 13);
+            deadzone(21, 14);
+            deadzone(21, 15);
+            deadzone(21, 16);
+            deadzone(21, 17);
+            deadzone(22, 13);
+            deadzone(22, 14);
+            deadzone(22, 15);
+            deadzone(22, 16);
+            deadzone(22, 17);
+            deadzone(23, 14);
+            deadzone(23, 15);
+            deadzone(19, 4);
+            deadzone(20, 4);
 
 
             start = new Entity(10, 11);
@@ -591,50 +589,159 @@ public class Level {
             delEmptyRect(0,0,41,26);
         }
 
-        if (number == 6) {//Cave 2
-            start = new Entity(27, 12);
-
-            emptyRect(4, 2, 11, 9);
-            delEmptyRect(11, 7, 11, 9);
-            del(10, 9);
-            Lines = Arrays.asList(12, 2, 12, 6);
-            DrawLines();
-            emptyRect(2, 11, 8, 19);
-            delEmptyRect(8, 12, 8, 13);
-            Lines = Arrays.asList(3, 2, 3, 10);
-            DrawLines();
-            Lines = Arrays.asList(4, 10, 9, 10);
-            DrawLines();
-            place(9, 11);
-            fillRect(3, 19, 4, 24);
-            fillRect(6, 19, 15, 23);
-            fillRect(8, 14, 11, 18);
-            fillRect(13, 12, 15, 15);
-            Lines = Arrays.asList(12, 14, 12, 15);
-            DrawLines();
-            fillRect(16, 19, 37, 20);
-            fillRect(21, 14, 24, 19);
-            fillRect(28, 14, 37, 18);
-            fillRect(17, 22, 38, 24);
-            del(5, 19);
-            place(37, 13);
-            fillRect(39, 12, 40, 24);
-            fillRect(37, 3, 40, 11);
-            fillRect(1, 1, 40, 2);
-            fillRect(1, 1, 2, 25);
-            fillRect(1, 25, 40, 25);
-            Lines = Arrays.asList(16, 3, 22, 3);
-            DrawLines();
-            fillRect(25, 3, 26, 4);
-            fillRect(22, 5, 26, 6);
-            fillRect(16, 6, 18, 8);
-            fillRect(12, 9, 21, 10);
-            fillRect(30, 6, 36, 7);
-            fillRect(30, 8, 33, 11);
-            fillRect(19, 11, 21, 12);
-            deadFillRect(22,3,24,4);
-
-
+        if(number==6){//Cave 2
+            emptyRect(12, 2, 17, 2);
+            place(11, 3);
+            place(18, 3);
+            place(10, 4);
+            place(20, 4);
+            place(9, 5);
+            emptyRect(14, 5, 16, 5);
+            place(21, 5);
+            place(9, 6);
+            place(13, 6);
+            place(17, 6);
+            place(22, 6);
+            place(9, 7);
+            place(13, 7);
+            place(18, 7);
+            place(22, 7);
+            place(9, 8);
+            place(14, 8);
+            place(19, 8);
+            place(23, 8);
+            place(10, 9);
+            place(15, 9);
+            place(16, 9);
+            place(20, 9);
+            place(23, 9);
+            place(11, 10);
+            place(12, 10);
+            place(17, 10);
+            place(21, 10);
+            place(23, 10);
+            place(13, 11);
+            place(14, 11);
+            place(18, 11);
+            place(21, 11);
+            place(24, 11);
+            place(10, 12);
+            place(11, 12);
+            place(12, 12);
+            place(15, 12);
+            place(19, 12);
+            place(21, 12);
+            place(24, 12);
+            place(28, 11);
+            place(30, 11);
+            place(28, 12);
+            place(31, 12);
+            place(9, 13);
+            place(13, 13);
+            place(14, 13);
+            place(16, 13);
+            place(19, 13);
+            place(21, 13);
+            place(24, 13);
+            place(29, 13);
+            place(32, 13);
+            place(8, 14);
+            place(15, 14);
+            place(16, 14);
+            place(20, 14);
+            place(22, 14);
+            place(25, 14);
+            place(30, 14);
+            place(33, 14);
+            place(8, 15);
+            place(11, 15);
+            place(12, 15);
+            place(20, 15);
+            place(22, 15);
+            place(25, 15);
+            place(31, 15);
+            place(33, 15);
+            place(8, 16);
+            place(11, 16);
+            place(13, 16);
+            place(14, 16);
+            place(19, 16);
+            place(23, 16);
+            place(26, 16);
+            place(31, 16);
+            place(33, 16);
+            place(8, 17);
+            place(11, 17);
+            place(14, 17);
+            place(15, 17);
+            place(18, 17);
+            place(23, 17);
+            place(26, 17);
+            place(30, 17);
+            place(33, 17);
+            place(9, 18);
+            place(12, 18);
+            place(16, 18);
+            place(17, 18);
+            place(24, 18);
+            place(27, 18);
+            place(29, 18);
+            place(33, 18);
+            place(8, 19);
+            place(13, 19);
+            place(24, 19);
+            place(32, 19);
+            place(9, 20);
+            place(13, 20);
+            place(25, 20);
+            place(26, 20);
+            place(30, 20);
+            place(31, 20);
+            place(9, 21);
+            place(10, 21);
+            place(13, 21);
+            place(9, 21);
+            place(27, 21);
+            place(29, 21);
+            place(11, 22);
+            place(12, 23);
+            place(13, 23);
+            place(13, 24);
+            deadzone(11, 11);
+            deadzone(12, 11);
+            deadzone(13, 12);
+            deadzone(14, 12);
+            deadzone(15, 13);
+            deadzone(8, 18);
+            deadzone(9, 19);
+            deadzone(12, 16);
+            deadzone(12, 17);
+            deadzone(13, 17);
+            deadzone(13, 18);
+            deadzone(14, 6);
+            deadzone(15, 6);
+            deadzone(16, 6);
+            deadzone(14, 7);
+            deadzone(15, 7);
+            deadzone(16, 7);
+            deadzone(17, 7);
+            deadzone(15, 8);
+            deadzone(16, 8);
+            deadzone(17, 8);
+            deadzone(18, 8);
+            deadzone(17, 9);
+            deadzone(18, 9);
+            deadzone(19, 9);
+            deadzone(18, 10);
+            deadzone(19, 10);
+            deadzone(20, 10);
+            deadzone(19, 11);
+            deadzone(20, 11);
+            deadzone(20, 12);
+            deadzone(20, 13);
+            deadzone(21, 14);
+            deadzone(21, 15);
+            start = new Entity(25, 6);
         }
 
         if (number == 10) { //Credits Sahani Boki
@@ -689,36 +796,36 @@ public class Level {
 
             fillRect(33, 13, 33, 20);
 
-            Deadzone(12, 7);
-            Deadzone(12, 8);
-            Deadzone(25, 7);
-            Deadzone(25, 8);
-            Deadzone(31, 4);
-            Deadzone(31, 5);
-            Deadzone(33, 5);
-            Deadzone(33, 4);
-            Deadzone(6, 15);
-            Deadzone(6, 16);
-            Deadzone(7, 15);
-            Deadzone(7, 16);
-            Deadzone(6, 18);
-            Deadzone(6, 19);
-            Deadzone(7, 18);
-            Deadzone(7, 19);
-            Deadzone(15, 18);
-            Deadzone(15, 19);
-            Deadzone(15, 20);
-            Deadzone(15, 21);
-            Deadzone(16, 18);
-            Deadzone(16, 19);
-            Deadzone(16, 20);
-            Deadzone(16, 21);
-            Deadzone(17, 18);
-            Deadzone(17, 19);
-            Deadzone(17, 20);
-            Deadzone(17, 21);
-            Deadzone(25, 17);
-            Deadzone(25, 20);
+            deadzone(12, 7);
+            deadzone(12, 8);
+            deadzone(25, 7);
+            deadzone(25, 8);
+            deadzone(31, 4);
+            deadzone(31, 5);
+            deadzone(33, 5);
+            deadzone(33, 4);
+            deadzone(6, 15);
+            deadzone(6, 16);
+            deadzone(7, 15);
+            deadzone(7, 16);
+            deadzone(6, 18);
+            deadzone(6, 19);
+            deadzone(7, 18);
+            deadzone(7, 19);
+            deadzone(15, 18);
+            deadzone(15, 19);
+            deadzone(15, 20);
+            deadzone(15, 21);
+            deadzone(16, 18);
+            deadzone(16, 19);
+            deadzone(16, 20);
+            deadzone(16, 21);
+            deadzone(17, 18);
+            deadzone(17, 19);
+            deadzone(17, 20);
+            deadzone(17, 21);
+            deadzone(25, 17);
+            deadzone(25, 20);
             delEmptyRect(0,0,41,26);
 
             start = new Entity(3, 12);
@@ -777,19 +884,19 @@ public class Level {
         }
     }
 
-    public void AppleEmptyRect(int x1, int y1, int x2, int y2) {
+    public void deadEmptyRect(int x1, int y1, int x2, int y2) {
 
         for (int i = x1; i <= x2; i++) {
-            Deadzone(i, y1);
+            deadzone(i, y1);
             if (y1 != y2) {
-                Deadzone(i, y2);
+                deadzone(i, y2);
             }
         }
         if (y2 - y1 > 0) {
             for (int i = y1 + 1; i < y2; i++) {
-                Deadzone(x1, i);
+                deadzone(x1, i);
                 if (x1 != x2) {
-                    Deadzone(x2, i);
+                    deadzone(x2, i);
                 }
             }
         }
@@ -924,7 +1031,7 @@ public class Level {
 
         for (int i = x1; i <= x2; i++) {
             for (int j = y1; j <= y2; j++) {
-                Deadzone(i, j);
+                deadzone(i, j);
 
             }
         }
@@ -932,7 +1039,7 @@ public class Level {
 
     }
 
-    public void Deadzone(int x, int y) {
+    public void deadzone(int x, int y) {
         gam.Cells[x][y] = "Dead";
     }
 
