@@ -81,8 +81,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
         Apfel = new ArrayList<Entity>(0);
         Portal = new ArrayList<Entity>(0);
         paused = false;
-        running = true;
-        paused = false;
         Growth = 2;
         end = true;
         direction = "right";
@@ -99,7 +97,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         lvl.doIt(Lev);
         createBody(lvl.start.getx(), lvl.start.gety()); //erzeugt ein Körperteil an den Koordinaten x, y
         createApple();
-
+        running = true;
 
     }
 
@@ -195,117 +193,113 @@ gr.drawString("Fuck this", 100, 100);*/
     public void run() {//Hauptmethode des Spiels
 
         while (true) {
-                if (!paused&&running) { //während man noch am leben ist
-                    if(lvl.Req<=snake.size()){
-                        init(CurrentLevel+1);
-                    }
-
-                    if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
-                        for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
-                            for (int j = 1; j < 21; j++) {
-                                switch (Cells[j][i]) {
-
-                                    case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
-
-                                    case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
-                                    case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
-                                    case "Block" -> System.out.println("H");
-                                    default -> System.out.print("F");
-                                }
-                                System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
-                            }
-                            System.out.println(); //Nächste Zeile
-                        }
-                        System.out.println("next"); //Nächster frame kennzeichnen
-                    }
-
-
-                    if (direction == "right") { //Richtung in die gegangen wird
-                        if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Dead")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
-                            Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
-                            if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
-                                snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
-                            } else {
-                                snake.get(0).x++; //ansonsten einfach in die richtung gehen
-                            }
-                            lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
-                        } else {
-                            running = false;//wenn der Kopf blockiert ist, dann Spiel beenden
-                            //endMethod();
-                        }
-                    }
-                    if (direction == "left") {
-                        if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Dead")) {
-                            Move();
-                            if (snake.get(0).x == 1) {
-                                snake.get(0).x = WindowsizeW;
-                            } else {
-                                snake.get(0).x--;
-                            }
-                            lastdir = "left";
-                        } else {
-                            running = false;
-                            // endMethod();
-                        }
-                    }
-                    if (direction == "up") {
-                        if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Dead")) {
-                            Move();
-                            if (snake.get(0).y == 1) {
-                                snake.get(0).y = WindowsizeH;
-                            } else {
-                                snake.get(0).y--;
-                            }
-                            lastdir = "up";
-                        } else {
-                            running = false;
-                            // endMethod();
-                        }
-                    }
-                    if (direction == "down") {
-                        if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Dead")) {
-                            Move();
-                            if (snake.get(0).y == WindowsizeH) {
-                                snake.get(0).y = 1;
-                            } else {
-                                snake.get(0).y++;
-                            }
-                            lastdir = "down";
-                        } else {
-                            running = false;
-                            // endMethod();
-                        }
-                    }
-                    if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
-                        Growth = Growth + ApplePower;
-                        createApple();
-                        for (int i = 0; i < Apfel.size(); i++) {
-                            if (Apfel.get(i).x == snake.get(0).x && Apfel.get(i).y == snake.get(0).y) {
-                                Apfel.remove(i);
-                            }
-                        }
-                    }
-                    Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
-
-                    repaint();//Änderungen anzeigen
+            if (!paused && running) { //während man noch am leben ist
+                if (lvl.Req <= snake.size()) {
+                    init(CurrentLevel + 1);
                 }
-                try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
-                    thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+                if (CellState) { //Ob die Zustände der Zellen zum Debuggen ausgegeben werden sollen
+                    for (int i = 1; i < 21; i++) { //Alle Zellen bis 20 durchgehen
+                        for (int j = 1; j < 21; j++) {
+                            switch (Cells[j][i]) {
+
+                                case "leer" -> System.out.print("O"); //Wenn die Zelle Leer ist "O" ausgeben
+
+                                case "Body" -> System.out.print("X"); //Wenn da ein Körperteil drin is dann "X"
+                                case "Apple" -> System.out.print("A"); //Wenn da ein Apfel drin is dann "A"
+                                case "Block" -> System.out.println("H");
+                                default -> System.out.print("F");
+                            }
+                            System.out.print("|"); //Abstand zwischen Zellen zum leichteren lesen
+                        }
+                        System.out.println(); //Nächste Zeile
+                    }
+                    System.out.println("next"); //Nächster frame kennzeichnen
                 }
-            if (end&&!running) {
-                end=false;
+
+
+                if (direction == "right") { //Richtung in die gegangen wird
+                    if (Cells[snake.get(0).x + 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x + 1][snake.get(0).y].equals("Dead")) { //Schauen die Zelle in der Richtung in die gegangen wird frei ist
+                        Move(); //Alle Körperteile ausser Kopf nachrücken. Muss zuerst ausgeführt werden bevor sich der Kopf bewegt!
+                        if (snake.get(0).x == WindowsizeW) { //Wenn der Kopf am rand ist
+                            snake.get(0).x = 1; //Auf der Anderen Seite wieder raus
+                        } else {
+                            snake.get(0).x++; //ansonsten einfach in die richtung gehen
+                        }
+                        lastdir = "right"; //es wurde zuletzt nach rechts gegangen. siehe @InputBlocker
+                    } else {
+                        running = false;//wenn der Kopf blockiert ist, dann Spiel beenden
+                        //endMethod();
+                    }
+                }
+                if (direction == "left") {
+                    if (Cells[snake.get(0).x - 1][snake.get(0).y].equals("leer") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Apple") || Cells[snake.get(0).x - 1][snake.get(0).y].equals("Dead")) {
+                        Move();
+                        if (snake.get(0).x == 1) {
+                            snake.get(0).x = WindowsizeW;
+                        } else {
+                            snake.get(0).x--;
+                        }
+                        lastdir = "left";
+                    } else {
+                        running = false;
+                        // endMethod();
+                    }
+                }
+                if (direction == "up") {
+                    if (Cells[snake.get(0).x][snake.get(0).y - 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y - 1].equals("Dead")) {
+                        Move();
+                        if (snake.get(0).y == 1) {
+                            snake.get(0).y = WindowsizeH;
+                        } else {
+                            snake.get(0).y--;
+                        }
+                        lastdir = "up";
+                    } else {
+                        running = false;
+                        // endMethod();
+                    }
+                }
+                if (direction == "down") {
+                    if (Cells[snake.get(0).x][snake.get(0).y + 1].equals("leer") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Apple") || Cells[snake.get(0).x][snake.get(0).y + 1].equals("Dead")) {
+                        Move();
+                        if (snake.get(0).y == WindowsizeH) {
+                            snake.get(0).y = 1;
+                        } else {
+                            snake.get(0).y++;
+                        }
+                        lastdir = "down";
+                    } else {
+                        running = false;
+                        // endMethod();
+                    }
+                }
+                if (Cells[snake.get(0).x][snake.get(0).y].equals("Apple")) {
+                    Growth = Growth + ApplePower;
+                    createApple();
+                    for (int i = 0; i < Apfel.size(); i++) {
+                        if (Apfel.get(i).x == snake.get(0).x && Apfel.get(i).y == snake.get(0).y) {
+                            Apfel.remove(i);
+                        }
+                    }
+                }
+                Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
+
+                repaint();//Änderungen anzeigen
+            }
+            try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
+                thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (end && !running) {
+                end = false;
                 endMethod();
             }
-            }
-
-
-
         }
 
 
-
+    }
 
 
     public void Move() {  //Die Körperteile nachrücken lassen
@@ -343,16 +337,15 @@ gr.drawString("Fuck this", 100, 100);*/
             paused = !paused;
 
         }
+        if (key == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
 
-            if (key == KeyEvent.VK_ESCAPE) {
-                System.exit(0);
+        }
+        if (key == KeyEvent.VK_R) {
 
-            }
-            if (key == KeyEvent.VK_R) {
+            init(CurrentLevel);
 
-                init(CurrentLevel);
-
-            }
+        }
 
 
     }
@@ -364,7 +357,7 @@ gr.drawString("Fuck this", 100, 100);*/
 
 
     @Override
-    public void keyTyped(KeyEvent e) { //äh?
+    public void keyTyped(KeyEvent k) { //äh?
 
     }
 
