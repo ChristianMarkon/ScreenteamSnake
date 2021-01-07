@@ -781,7 +781,78 @@ public class Level {
             start = new Entity(3, 12);
         }
 
+        if(number == 11)
+        {
+            fillRect(19,3,21,3);
+            fillRect(22,2,23,2);
+            fillRect(24,3,26,3);
+            fillRect(27,4,28,4);
+            quer(29,5,31,7);
+            quer(32,7,34,9);
+            fillRect(33,11,35,11);
+            fillRect(27,10,32,10);
+            quer(28,10,26,12);
+            quer(24,9,26,11);
+            deadzone(25,11);
 
+            fillRect(25,12,22,12);
+            fillRect(19,11,21,11);
+            fillRect(11,12,18,12);
+            place(15,11);
+            place(10,11);
+            fillRect(8,11,7,10);
+            del(8,10);
+            deadzone(8,10);
+
+            fillRect(8,9,10,9);
+            fillRect(11,7,11,8);
+            fillRect(10,5,10,6);
+            place(12,5);
+            fillRect(13,6,14,6);
+            fillRect(15,5,16,5);
+            fillRect(17,4,18,4);
+
+            place(13,9);
+            place(16,9);
+
+            quer(20,5,18,5);
+            fillRect(21,6,21,8);
+            deadzone(20,6);
+
+            quer(7, 15, 6, 16);
+            quer(6, 17, 5, 18);
+            quer(5, 19, 4, 20);
+            fillRect(8, 16, 8, 18);
+            place(9,18);
+            quer(9, 19, 10, 20);
+            fillRect(6, 18, 7, 18);
+            deadEmptyRect(7,16,7,17);
+
+            fillRect(14,18,15,19);
+            fillRect(14,20,14,23);
+            fillRect(16,20,16,21);
+            fillRect(17,22,18,23);
+            fillRect(18,18,18,22);
+            deadEmptyRect(15,20,15,21);
+            deadEmptyRect(17,20,17,21);
+
+            fillRect(23,15,24,16);
+            fillRect(23,17,23,20);
+            fillRect(25,17,25,18);
+            fillRect(26,19,27,20);
+            fillRect(27,18,27,15);
+            deadEmptyRect(25,17,26,18);
+            deadEmptyRect(25,17,26,18);
+
+            quer(33, 18, 32, 19);
+            quer(32, 20, 31, 21);
+            quer(31, 22, 30, 23);
+            fillRect(34, 19, 34, 20);
+            fillRect(35,21,35,22);
+            place(36,23);
+            fillRect(32, 21, 34, 21);
+            deadEmptyRect(33,19,33,20);
+        }
 
         if (number >= 12) {//PacMan
             emptyRect(1, 1, gam.WindowsizeW, gam.WindowsizeH);
