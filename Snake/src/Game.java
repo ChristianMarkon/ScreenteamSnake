@@ -12,8 +12,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     //Gameplay options
-    public int ApplePower = 2; //Wie viele Körperteile pro Apfel generiert werden
-    public int speed = 100; //Wie negativ proportional schnell das Spiel ist
+    public int ApplePower = 1; //Wie viele Körperteile pro Apfel generiert werden
+    public int speed = 150; //Wie negativ proportional schnell das Spiel ist
     public boolean WandTod = true;
     public int CurrentLevel;
 
@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         end = true;
         direction = "right";
         lastdir = "right";
-        SpawnApples = 50;
+        SpawnApples = 0;
         frame.setSize(Width + 16, Height + 39);
         frame.getContentPane().setBackground(new Color(0, 0, 0));
         frame.getContentPane().add(this);

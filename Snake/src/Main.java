@@ -22,3 +22,9 @@ public class Main  {
 
 
 }
+
+/*Bugs: racecondition bei neustart
+flackern
+leeres fenster bei aufruf
+wenn für äpfel kein platz is -> loop
+ */

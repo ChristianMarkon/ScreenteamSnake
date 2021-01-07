@@ -16,11 +16,11 @@ public class Level {
     public void doIt(int number) {
         clear();
         start = new Entity(3, 4);
-        Req = 10;
+        Req = 15;
         if (gam.WandTod) {
             emptyRect(0, 0, gam.WindowsizeW + 1, gam.WindowsizeH + 1);
         }
-        if (number == 1) {
+        if (number >= 12) {//PacMan
             emptyRect(1, 1, gam.WindowsizeW, gam.WindowsizeH);
             emptyRect(3, 3, 6, 4);
             emptyRect(3, 6, 6, 6);
@@ -71,10 +71,10 @@ public class Level {
             AppleEmptyRect(37, 10, 40, 10);
             AppleEmptyRect(37, 15, 40, 15);
             start = new Entity(17, 12);
-            Req = 20;
+            Req = 250;
 
         }
-        if (number == 2) {
+        if (number == 1) { //Players unknown Playground
             emptyRect(9, 2, 10, 2);
             place(30, 2);
             place(30, 3);
@@ -133,11 +133,12 @@ public class Level {
             emptyRect(27, 20, 29, 20);
             Deadzone(28, 19);
             Deadzone(28, 17);
+            delEmptyRect(0,0,41,26);
             start = new Entity(11, 12);
         }
 
 
-        if (number == 3) {
+        if (number == 2) {//Squiggles
             emptyRect(5, 10, 5, 7);
             place(6, 11);
             place(7, 12);
@@ -185,8 +186,9 @@ public class Level {
             emptyRect(16, 17, 16, 22);
             emptyRect(17, 23, 18, 23);
             emptyRect(19, 22, 19, 21);
+            delEmptyRect(0,0,41,26);
         }
-        if (number == 4) {
+        if (number == 4) { //Formen
             fillRect(3, 4, 5, 6);
             place(3, 3);
             emptyRect(14, 21, 19, 24);
@@ -215,9 +217,10 @@ public class Level {
             emptyRect(32, 21, 34, 22);
 
             start = new Entity(6, 7);
+            delEmptyRect(0,0,41,26);
 
         }
-        if(number==5) {
+        if (number == 5) {//Snek
             place(14, 2);
             place(16, 2);
             place(13, 3);
@@ -289,9 +292,10 @@ public class Level {
             Deadzone(16, 3);
             Deadzone(19, 6);
             Deadzone(23, 22);
+            delEmptyRect(0,0,41,26);
             start = new Entity(24, 4);
         }
-        if(number==6){
+        if (number == 8) {//Snake
             emptyRect(12, 2, 17, 2);
             place(11, 3);
             place(18, 3);
@@ -435,9 +439,10 @@ public class Level {
             Deadzone(21, 14);
             Deadzone(21, 15);
             start = new Entity(25, 6);
+            delEmptyRect(0,0,41,26);
         }
 
-        if (number == 9) {
+        if (number == 9) { //Credits Chris, Abdul
             quer(5, 2, 3, 4);
             quer(3, 6, 5, 8);
             quer(6, 8, 7, 7);
@@ -515,7 +520,7 @@ public class Level {
 
             start = new Entity(10, 11);
         }
-        if (number == 11) {
+        if (number == 3) {//Cave 1
             fillRect(1, 1, 40, 25);
             delFillRect(8, 3, 15, 5);
             delFillRect(11, 6, 12, 13);
@@ -530,9 +535,12 @@ public class Level {
             delFillRect(26, 3, 31, 7);
             delFillRect(21, 6, 25, 7);
             delFillRect(17, 8, 22, 10);
+            delEmptyRect(16,3, 20 , 3);
+            delEmptyRect(20,4, 25 , 4);
+
             start = new Entity(3, 16);
         }
-        if (number == 7) {
+        if (number == 7) {//Kinda Sus
             start = new Entity(1, 5);
             Lines = Arrays.asList(11, 10, 11, 18);
             DrawLines();
@@ -580,9 +588,10 @@ public class Level {
             DrawLines();
             Lines = Arrays.asList(23, 12, 24, 12);
             DrawLines();
+            delEmptyRect(0,0,41,26);
         }
 
-        if (number == 8) {
+        if (number == 6) {//Cave 2
             start = new Entity(27, 12);
 
             emptyRect(4, 2, 11, 9);
@@ -623,10 +632,12 @@ public class Level {
             fillRect(30, 6, 36, 7);
             fillRect(30, 8, 33, 11);
             fillRect(19, 11, 21, 12);
+            deadFillRect(22,3,24,4);
+
 
         }
 
-        if (number == 10) {
+        if (number == 10) { //Credits Sahani Boki
 
             emptyRect(4, 3, 7, 6);
             delEmptyRect(7, 4, 7, 5);
@@ -708,7 +719,7 @@ public class Level {
             Deadzone(17, 21);
             Deadzone(25, 17);
             Deadzone(25, 20);
-
+            delEmptyRect(0,0,41,26);
 
             start = new Entity(3, 12);
 
@@ -897,6 +908,28 @@ public class Level {
             gam.Portal.add(new Entity("leer", x, y));
         }
         gam.Cells[x][y] = "leer";
+    }
+
+    public void deadFillRect(int x1, int y1, int x2, int y2) {
+        if (x2 < x1) {
+            int X = x2;
+            x2 = x1;
+            x1 = X;
+        }
+        if (y2 < y1) {
+            int Y = y2;
+            y2 = y1;
+            y1 = Y;
+        }
+
+        for (int i = x1; i <= x2; i++) {
+            for (int j = y1; j <= y2; j++) {
+                Deadzone(i, j);
+
+            }
+        }
+
+
     }
 
     public void Deadzone(int x, int y) {
