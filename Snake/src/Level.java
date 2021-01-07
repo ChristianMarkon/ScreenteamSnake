@@ -20,60 +20,7 @@ public class Level {
         if (gam.WandTod) {
             emptyRect(0, 0, gam.WindowsizeW + 1, gam.WindowsizeH + 1);
         }
-        if (number >= 12) {//PacMan
-            emptyRect(1, 1, gam.WindowsizeW, gam.WindowsizeH);
-            emptyRect(3, 3, 6, 4);
-            emptyRect(3, 6, 6, 6);
-            emptyRect(1, 9, 5, 11);
-            emptyRect(1, 14, 5, 16);
-            emptyRect(1, 22, 4, 22);
-            emptyRect(4, 20, 7, 20);
-            emptyRect(7, 21, 7, 22);
-            emptyRect(8, 7, 8, 11);
-            emptyRect(9, 9, 11, 9);
-            emptyRect(8, 14, 8, 16);
-            emptyRect(9, 3, 16, 4);
-            emptyRect(11, 13, 12, 17);
-            emptyRect(10, 20, 16, 20);
-            emptyRect(11, 22, 15, 23);
-            emptyRect(15, 10, 26, 15);
-            emptyRect(16, 6, 25, 6);
-            emptyRect(20, 7, 21, 8);
-            emptyRect(16, 18, 25, 18);
-            emptyRect(20, 19, 21, 20);
-            emptyRect(20, 22, 21, 23);
-            emptyRect(20, 2, 21, 4);
-            emptyRect(25, 3, 32, 4);
-            emptyRect(35, 3, 38, 4);
-            emptyRect(35, 6, 38, 6);
-            emptyRect(30, 9, 32, 9);
-            emptyRect(33, 7, 33, 11);
-            emptyRect(36, 9, 40, 11);
-            emptyRect(29, 13, 30, 17);
-            emptyRect(33, 14, 33, 16);
-            emptyRect(25, 20, 31, 20);
-            emptyRect(26, 22, 30, 23);
-            emptyRect(36, 14, 40, 16);
-            emptyRect(34, 20, 37, 20);
-            emptyRect(34, 21, 34, 22);
-            emptyRect(37, 22, 39, 22);
-            del(1, 10);
-            delEmptyRect(1, 12, 1, 13);
-            del(1, 15);
-            delEmptyRect(19, 10, 22, 10);
-            del(40, 10);
-            delEmptyRect(40, 12, 40, 13);
-            del(40, 15);
-            delEmptyRect(0, 12, 0, 13);
-            delEmptyRect(41, 12, 41, 13);
-            deadEmptyRect(1, 10, 4, 10);
-            deadEmptyRect(1, 15, 4, 15);
-            deadEmptyRect(37, 10, 40, 10);
-            deadEmptyRect(37, 15, 40, 15);
-            start = new Entity(17, 12);
-            Req = 250;
 
-        }
         if (number == 1) { //Players unknown Playground
             emptyRect(9, 2, 10, 2);
             place(30, 2);
@@ -137,7 +84,6 @@ public class Level {
             start = new Entity(11, 12);
         }
 
-
         if (number == 2) {//Squiggles
             emptyRect(5, 10, 5, 7);
             place(6, 11);
@@ -188,6 +134,28 @@ public class Level {
             emptyRect(19, 22, 19, 21);
             delEmptyRect(0,0,41,26);
         }
+
+        if (number == 3) {//Cave 1
+            fillRect(1, 1, 40, 25);
+            delFillRect(8, 3, 15, 5);
+            delFillRect(11, 6, 12, 13);
+            delFillRect(3, 9, 6, 18);
+            delFillRect(7, 14, 7, 18);
+            delFillRect(8, 14, 15, 20);
+            delFillRect(16, 16, 24, 17);
+            delFillRect(25, 13, 31, 22);
+            delFillRect(32, 13, 37, 17);
+            delFillRect(29, 12, 30, 9);
+            delFillRect(29, 6, 36, 8);
+            delFillRect(26, 3, 31, 7);
+            delFillRect(21, 6, 25, 7);
+            delFillRect(17, 8, 22, 10);
+            delEmptyRect(16,3, 20 , 3);
+            delEmptyRect(20,4, 25 , 4);
+
+            start = new Entity(3, 16);
+        }
+
         if (number == 4) { //Formen
             fillRect(3, 4, 5, 6);
             place(3, 3);
@@ -218,8 +186,8 @@ public class Level {
 
             start = new Entity(6, 7);
             delEmptyRect(0,0,41,26);
-
         }
+
         if (number == 5) {//Snek
             place(14, 2);
             place(16, 2);
@@ -293,6 +261,213 @@ public class Level {
             delEmptyRect(0,0,41,26);
             start = new Entity(24, 4);
         }
+
+        if(number==6){//Cave 2
+            emptyRect(12, 2, 17, 2);
+            place(11, 3);
+            place(18, 3);
+            place(10, 4);
+            place(20, 4);
+            place(9, 5);
+            emptyRect(14, 5, 16, 5);
+            place(21, 5);
+            place(9, 6);
+            place(13, 6);
+            place(17, 6);
+            place(22, 6);
+            place(9, 7);
+            place(13, 7);
+            place(18, 7);
+            place(22, 7);
+            place(9, 8);
+            place(14, 8);
+            place(19, 8);
+            place(23, 8);
+            place(10, 9);
+            place(15, 9);
+            place(16, 9);
+            place(20, 9);
+            place(23, 9);
+            place(11, 10);
+            place(12, 10);
+            place(17, 10);
+            place(21, 10);
+            place(23, 10);
+            place(13, 11);
+            place(14, 11);
+            place(18, 11);
+            place(21, 11);
+            place(24, 11);
+            place(10, 12);
+            place(11, 12);
+            place(12, 12);
+            place(15, 12);
+            place(19, 12);
+            place(21, 12);
+            place(24, 12);
+            place(28, 11);
+            place(30, 11);
+            place(28, 12);
+            place(31, 12);
+            place(9, 13);
+            place(13, 13);
+            place(14, 13);
+            place(16, 13);
+            place(19, 13);
+            place(21, 13);
+            place(24, 13);
+            place(29, 13);
+            place(32, 13);
+            place(8, 14);
+            place(15, 14);
+            place(16, 14);
+            place(20, 14);
+            place(22, 14);
+            place(25, 14);
+            place(30, 14);
+            place(33, 14);
+            place(8, 15);
+            place(11, 15);
+            place(12, 15);
+            place(20, 15);
+            place(22, 15);
+            place(25, 15);
+            place(31, 15);
+            place(33, 15);
+            place(8, 16);
+            place(11, 16);
+            place(13, 16);
+            place(14, 16);
+            place(19, 16);
+            place(23, 16);
+            place(26, 16);
+            place(31, 16);
+            place(33, 16);
+            place(8, 17);
+            place(11, 17);
+            place(14, 17);
+            place(15, 17);
+            place(18, 17);
+            place(23, 17);
+            place(26, 17);
+            place(30, 17);
+            place(33, 17);
+            place(9, 18);
+            place(12, 18);
+            place(16, 18);
+            place(17, 18);
+            place(24, 18);
+            place(27, 18);
+            place(29, 18);
+            place(33, 18);
+            place(8, 19);
+            place(13, 19);
+            place(24, 19);
+            place(32, 19);
+            place(9, 20);
+            place(13, 20);
+            place(25, 20);
+            place(26, 20);
+            place(30, 20);
+            place(31, 20);
+            place(9, 21);
+            place(10, 21);
+            place(13, 21);
+            place(9, 21);
+            place(27, 21);
+            place(29, 21);
+            place(11, 22);
+            place(12, 23);
+            place(13, 23);
+            place(13, 24);
+            deadzone(11, 11);
+            deadzone(12, 11);
+            deadzone(13, 12);
+            deadzone(14, 12);
+            deadzone(15, 13);
+            deadzone(8, 18);
+            deadzone(9, 19);
+            deadzone(12, 16);
+            deadzone(12, 17);
+            deadzone(13, 17);
+            deadzone(13, 18);
+            deadzone(14, 6);
+            deadzone(15, 6);
+            deadzone(16, 6);
+            deadzone(14, 7);
+            deadzone(15, 7);
+            deadzone(16, 7);
+            deadzone(17, 7);
+            deadzone(15, 8);
+            deadzone(16, 8);
+            deadzone(17, 8);
+            deadzone(18, 8);
+            deadzone(17, 9);
+            deadzone(18, 9);
+            deadzone(19, 9);
+            deadzone(18, 10);
+            deadzone(19, 10);
+            deadzone(20, 10);
+            deadzone(19, 11);
+            deadzone(20, 11);
+            deadzone(20, 12);
+            deadzone(20, 13);
+            deadzone(21, 14);
+            deadzone(21, 15);
+            start = new Entity(25, 6);
+        }
+
+        if (number == 7) {//Kinda Sus
+            start = new Entity(1, 5);
+            Lines = Arrays.asList(11, 10, 11, 18);
+            DrawLines();
+            place(12, 10);
+            Lines = Arrays.asList(12, 9, 14, 9);
+            DrawLines();
+            place(14, 8);
+            Lines = Arrays.asList(15, 6, 15, 7);
+            DrawLines();
+            place(16, 5);
+            Lines = Arrays.asList(17, 4, 21, 4);
+            DrawLines();
+            Lines = Arrays.asList(22, 5, 23, 5);
+            DrawLines();
+            Lines = Arrays.asList(24, 6, 24, 7);
+            DrawLines();
+            place(25, 8);
+            Lines = Arrays.asList(26, 9, 26, 10);
+            DrawLines();
+            Lines = Arrays.asList(25, 13, 25, 19);
+            DrawLines();
+            emptyRect(21, 20, 24, 22);
+            delEmptyRect(22, 20, 23, 20);
+            Lines = Arrays.asList(19, 19, 21, 19);
+            DrawLines();
+            place(20, 20);
+            fillRect(18, 20, 19, 21);
+            Lines = Arrays.asList(15, 23, 18, 23);
+            DrawLines();
+            Lines = Arrays.asList(14, 19, 14, 22);
+            DrawLines();
+            place(15, 22);
+            place(13, 19);
+            Lines = Arrays.asList(12, 18, 12, 19);
+            DrawLines();
+
+            Lines = Arrays.asList(14, 11, 14, 17);
+            DrawLines();
+
+            quer(19, 7, 17, 9);
+            quer(17, 10, 20, 13);
+            Lines = Arrays.asList(20, 7, 22, 7);
+            DrawLines();
+            Lines = Arrays.asList(21, 13, 22, 13);
+            DrawLines();
+            Lines = Arrays.asList(23, 12, 24, 12);
+            DrawLines();
+            delEmptyRect(0,0,41,26);
+        }
+
         if (number == 8) {//Snake
             emptyRect(12, 2, 17, 2);
             place(11, 3);
@@ -518,231 +693,6 @@ public class Level {
 
             start = new Entity(10, 11);
         }
-        if (number == 3) {//Cave 1
-            fillRect(1, 1, 40, 25);
-            delFillRect(8, 3, 15, 5);
-            delFillRect(11, 6, 12, 13);
-            delFillRect(3, 9, 6, 18);
-            delFillRect(7, 14, 7, 18);
-            delFillRect(8, 14, 15, 20);
-            delFillRect(16, 16, 24, 17);
-            delFillRect(25, 13, 31, 22);
-            delFillRect(32, 13, 37, 17);
-            delFillRect(29, 12, 30, 9);
-            delFillRect(29, 6, 36, 8);
-            delFillRect(26, 3, 31, 7);
-            delFillRect(21, 6, 25, 7);
-            delFillRect(17, 8, 22, 10);
-            delEmptyRect(16,3, 20 , 3);
-            delEmptyRect(20,4, 25 , 4);
-
-            start = new Entity(3, 16);
-        }
-        if (number == 7) {//Kinda Sus
-            start = new Entity(1, 5);
-            Lines = Arrays.asList(11, 10, 11, 18);
-            DrawLines();
-            place(12, 10);
-            Lines = Arrays.asList(12, 9, 14, 9);
-            DrawLines();
-            place(14, 8);
-            Lines = Arrays.asList(15, 6, 15, 7);
-            DrawLines();
-            place(16, 5);
-            Lines = Arrays.asList(17, 4, 21, 4);
-            DrawLines();
-            Lines = Arrays.asList(22, 5, 23, 5);
-            DrawLines();
-            Lines = Arrays.asList(24, 6, 24, 7);
-            DrawLines();
-            place(25, 8);
-            Lines = Arrays.asList(26, 9, 26, 10);
-            DrawLines();
-            Lines = Arrays.asList(25, 13, 25, 19);
-            DrawLines();
-            emptyRect(21, 20, 24, 22);
-            delEmptyRect(22, 20, 23, 20);
-            Lines = Arrays.asList(19, 19, 21, 19);
-            DrawLines();
-            place(20, 20);
-            fillRect(18, 20, 19, 21);
-            Lines = Arrays.asList(15, 23, 18, 23);
-            DrawLines();
-            Lines = Arrays.asList(14, 19, 14, 22);
-            DrawLines();
-            place(15, 22);
-            place(13, 19);
-            Lines = Arrays.asList(12, 18, 12, 19);
-            DrawLines();
-
-            Lines = Arrays.asList(14, 11, 14, 17);
-            DrawLines();
-
-            quer(19, 7, 17, 9);
-            quer(17, 10, 20, 13);
-            Lines = Arrays.asList(20, 7, 22, 7);
-            DrawLines();
-            Lines = Arrays.asList(21, 13, 22, 13);
-            DrawLines();
-            Lines = Arrays.asList(23, 12, 24, 12);
-            DrawLines();
-            delEmptyRect(0,0,41,26);
-        }
-
-        if(number==6){//Cave 2
-            emptyRect(12, 2, 17, 2);
-            place(11, 3);
-            place(18, 3);
-            place(10, 4);
-            place(20, 4);
-            place(9, 5);
-            emptyRect(14, 5, 16, 5);
-            place(21, 5);
-            place(9, 6);
-            place(13, 6);
-            place(17, 6);
-            place(22, 6);
-            place(9, 7);
-            place(13, 7);
-            place(18, 7);
-            place(22, 7);
-            place(9, 8);
-            place(14, 8);
-            place(19, 8);
-            place(23, 8);
-            place(10, 9);
-            place(15, 9);
-            place(16, 9);
-            place(20, 9);
-            place(23, 9);
-            place(11, 10);
-            place(12, 10);
-            place(17, 10);
-            place(21, 10);
-            place(23, 10);
-            place(13, 11);
-            place(14, 11);
-            place(18, 11);
-            place(21, 11);
-            place(24, 11);
-            place(10, 12);
-            place(11, 12);
-            place(12, 12);
-            place(15, 12);
-            place(19, 12);
-            place(21, 12);
-            place(24, 12);
-            place(28, 11);
-            place(30, 11);
-            place(28, 12);
-            place(31, 12);
-            place(9, 13);
-            place(13, 13);
-            place(14, 13);
-            place(16, 13);
-            place(19, 13);
-            place(21, 13);
-            place(24, 13);
-            place(29, 13);
-            place(32, 13);
-            place(8, 14);
-            place(15, 14);
-            place(16, 14);
-            place(20, 14);
-            place(22, 14);
-            place(25, 14);
-            place(30, 14);
-            place(33, 14);
-            place(8, 15);
-            place(11, 15);
-            place(12, 15);
-            place(20, 15);
-            place(22, 15);
-            place(25, 15);
-            place(31, 15);
-            place(33, 15);
-            place(8, 16);
-            place(11, 16);
-            place(13, 16);
-            place(14, 16);
-            place(19, 16);
-            place(23, 16);
-            place(26, 16);
-            place(31, 16);
-            place(33, 16);
-            place(8, 17);
-            place(11, 17);
-            place(14, 17);
-            place(15, 17);
-            place(18, 17);
-            place(23, 17);
-            place(26, 17);
-            place(30, 17);
-            place(33, 17);
-            place(9, 18);
-            place(12, 18);
-            place(16, 18);
-            place(17, 18);
-            place(24, 18);
-            place(27, 18);
-            place(29, 18);
-            place(33, 18);
-            place(8, 19);
-            place(13, 19);
-            place(24, 19);
-            place(32, 19);
-            place(9, 20);
-            place(13, 20);
-            place(25, 20);
-            place(26, 20);
-            place(30, 20);
-            place(31, 20);
-            place(9, 21);
-            place(10, 21);
-            place(13, 21);
-            place(9, 21);
-            place(27, 21);
-            place(29, 21);
-            place(11, 22);
-            place(12, 23);
-            place(13, 23);
-            place(13, 24);
-            deadzone(11, 11);
-            deadzone(12, 11);
-            deadzone(13, 12);
-            deadzone(14, 12);
-            deadzone(15, 13);
-            deadzone(8, 18);
-            deadzone(9, 19);
-            deadzone(12, 16);
-            deadzone(12, 17);
-            deadzone(13, 17);
-            deadzone(13, 18);
-            deadzone(14, 6);
-            deadzone(15, 6);
-            deadzone(16, 6);
-            deadzone(14, 7);
-            deadzone(15, 7);
-            deadzone(16, 7);
-            deadzone(17, 7);
-            deadzone(15, 8);
-            deadzone(16, 8);
-            deadzone(17, 8);
-            deadzone(18, 8);
-            deadzone(17, 9);
-            deadzone(18, 9);
-            deadzone(19, 9);
-            deadzone(18, 10);
-            deadzone(19, 10);
-            deadzone(20, 10);
-            deadzone(19, 11);
-            deadzone(20, 11);
-            deadzone(20, 12);
-            deadzone(20, 13);
-            deadzone(21, 14);
-            deadzone(21, 15);
-            start = new Entity(25, 6);
-        }
 
         if (number == 10) { //Credits Sahani Boki
 
@@ -829,6 +779,62 @@ public class Level {
             delEmptyRect(0,0,41,26);
 
             start = new Entity(3, 12);
+        }
+
+
+
+        if (number >= 12) {//PacMan
+            emptyRect(1, 1, gam.WindowsizeW, gam.WindowsizeH);
+            emptyRect(3, 3, 6, 4);
+            emptyRect(3, 6, 6, 6);
+            emptyRect(1, 9, 5, 11);
+            emptyRect(1, 14, 5, 16);
+            emptyRect(1, 22, 4, 22);
+            emptyRect(4, 20, 7, 20);
+            emptyRect(7, 21, 7, 22);
+            emptyRect(8, 7, 8, 11);
+            emptyRect(9, 9, 11, 9);
+            emptyRect(8, 14, 8, 16);
+            emptyRect(9, 3, 16, 4);
+            emptyRect(11, 13, 12, 17);
+            emptyRect(10, 20, 16, 20);
+            emptyRect(11, 22, 15, 23);
+            emptyRect(15, 10, 26, 15);
+            emptyRect(16, 6, 25, 6);
+            emptyRect(20, 7, 21, 8);
+            emptyRect(16, 18, 25, 18);
+            emptyRect(20, 19, 21, 20);
+            emptyRect(20, 22, 21, 23);
+            emptyRect(20, 2, 21, 4);
+            emptyRect(25, 3, 32, 4);
+            emptyRect(35, 3, 38, 4);
+            emptyRect(35, 6, 38, 6);
+            emptyRect(30, 9, 32, 9);
+            emptyRect(33, 7, 33, 11);
+            emptyRect(36, 9, 40, 11);
+            emptyRect(29, 13, 30, 17);
+            emptyRect(33, 14, 33, 16);
+            emptyRect(25, 20, 31, 20);
+            emptyRect(26, 22, 30, 23);
+            emptyRect(36, 14, 40, 16);
+            emptyRect(34, 20, 37, 20);
+            emptyRect(34, 21, 34, 22);
+            emptyRect(37, 22, 39, 22);
+            del(1, 10);
+            delEmptyRect(1, 12, 1, 13);
+            del(1, 15);
+            delEmptyRect(19, 10, 22, 10);
+            del(40, 10);
+            delEmptyRect(40, 12, 40, 13);
+            del(40, 15);
+            delEmptyRect(0, 12, 0, 13);
+            delEmptyRect(41, 12, 41, 13);
+            deadEmptyRect(1, 10, 4, 10);
+            deadEmptyRect(1, 15, 4, 15);
+            deadEmptyRect(37, 10, 40, 10);
+            deadEmptyRect(37, 15, 40, 15);
+            start = new Entity(17, 12);
+            Req = 250;
 
         }
 
