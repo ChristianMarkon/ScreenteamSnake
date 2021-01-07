@@ -72,8 +72,8 @@ public class Level {
             AppleEmptyRect(37, 15, 40, 15);
             start = new Entity(17, 12);
             Req = 20;
-        }
 
+        }
         if (number == 2) {
             emptyRect(9, 2, 10, 2);
             place(30, 2);
@@ -193,124 +193,310 @@ public class Level {
             delEmptyRect(15, 21, 19, 21);
             Lines = Arrays.asList(4, 9, 4, 12, 7, 15, 11);
             DrawLines();
-            emptyRect(11, 3, 11, 6);
-            emptyRect(17, 3, 23, 3);
-            emptyRect(34, 2, 35, 3);
-            emptyRect(15, 7, 16, 8);
-            Lines = Arrays.asList(27, 6, 31, 11);
+            emptyRect(11,3,11,6);
+            emptyRect(17,3,23,3);
+            emptyRect(34,2,35,3);
+            emptyRect(15,7,16,8);
+            Lines = Arrays.asList(27,6,31,11);
             DrawLines();
-            emptyRect(25, 9, 27, 10);
-            emptyRect(35, 7, 39, 8);
-            fillRect(19, 12, 21, 14);
-            Lines = Arrays.asList(17, 18, 21, 15);
+            emptyRect(25,9,27,10);
+            emptyRect(35,7,39,8);
+            fillRect(19,12,21,14);
+            Lines = Arrays.asList(17,18,21,15);
             DrawLines();
-            emptyRect(29, 13, 29, 15);
-            place(30, 15);
-            fillRect(35, 14, 37, 16);
-            place(7, 19);
-            Lines = Arrays.asList(8, 20, 6, 23, 8, 24);
+            emptyRect(29,13,29,15);
+            place(30,15);
+            fillRect(35,14,37,16);
+            place(7,19);
+            Lines = Arrays.asList(8,20,6,23,8,24);
             DrawLines();
-            Lines = Arrays.asList(24, 21, 24, 23, 28, 20);
+            Lines = Arrays.asList(24,21,24,23,28,20);
             DrawLines();
-            emptyRect(32, 21, 34, 22);
+            emptyRect(32,21,34,22);
 
             start = new Entity(6, 7);
 
         }
 
-        if (number == 7) {
-            start = new Entity(1, 5);
-            Lines = Arrays.asList(11, 10, 11, 18);
-            DrawLines();
-            place(12, 10);
-            Lines = Arrays.asList(12, 9, 14, 9);
-            DrawLines();
-            place(14, 8);
-            Lines = Arrays.asList(15, 6, 15, 7);
-            DrawLines();
-            place(16, 5);
-            Lines = Arrays.asList(17, 4, 21, 4);
-            DrawLines();
-            Lines = Arrays.asList(22, 5, 23, 5);
-            DrawLines();
-            Lines = Arrays.asList(24, 6, 24, 7);
-            DrawLines();
-            place(25, 8);
-            Lines = Arrays.asList(26, 9, 26, 10);
-            DrawLines();
-            Lines = Arrays.asList(25, 13, 25, 19);
-            DrawLines();
-            emptyRect(21, 20, 24, 22);
-            delEmptyRect(22, 20, 23, 20);
-            Lines = Arrays.asList(19, 19, 21, 19);
-            DrawLines();
-            place(20, 20);
-            fillRect(18, 20, 19, 21);
-            Lines = Arrays.asList(15, 23, 18, 23);
-            DrawLines();
-            Lines = Arrays.asList(14, 19, 14, 22);
-            DrawLines();
-            place(15, 22);
-            place(13, 19);
-            Lines = Arrays.asList(12, 18, 12, 19);
-            DrawLines();
+        if (number == 9) {
+            quer(5, 2, 3, 4);
+            quer(3, 6, 5, 8);
+            quer(6, 8, 7, 7);
+            place(3, 5);
+            quer(6, 2, 7, 3);
+            fillRect(11, 3, 11, 7);
+            fillRect(14, 3, 14, 7);
+            fillRect(12, 5, 13, 5);
+            fillRect(18, 3, 18, 8);
+            fillRect(19, 3, 21, 3);
+            fillRect(21, 4, 21, 5);
+            fillRect(19, 5, 20, 5);
+            quer(19, 6, 21, 8);
+            fillRect(26, 3, 26, 8);
+            fillRect(31, 2, 34, 2);
+            fillRect(31, 3, 31, 5);
+            fillRect(32, 5, 34, 5);
+            fillRect(34, 6, 34, 8);
+            fillRect(33, 8, 31, 8);
 
-            Lines = Arrays.asList(14, 11, 14, 17);
-            DrawLines();
 
-            quer(19, 7, 17, 9);
-            quer(17, 10, 20, 13);
-            Lines = Arrays.asList(20, 7, 22, 7);
-            DrawLines();
-            Lines = Arrays.asList(21, 13, 22, 13);
-            DrawLines();
-            Lines = Arrays.asList(23, 12, 24, 12);
-            DrawLines();
+            place(6, 15);
+            fillRect(5, 16, 5, 17);
+            fillRect(4, 18, 4, 19);
+            fillRect(3, 20, 3, 20);
+            fillRect(7, 16, 7, 17);
+            fillRect(8, 18, 8, 19);
+            place(9, 20);
+            fillRect(5, 18, 7, 18);
+            fillRect(13, 15, 13, 21);
+            fillRect(14, 15, 15, 15);
+            fillRect(14, 18, 15, 18);
+            fillRect(14, 21, 15, 21);
+            fillRect(16, 16, 16, 20);
+            fillRect(20, 12, 20, 18);
+            place(24, 15);
+            place(21, 12);
+            place(21, 18);
+            quer(22, 12, 24, 14);
+            quer(22, 18, 24, 16);
+
+            fillRect(27, 16, 27, 20);
+            fillRect(28, 21, 30, 21);
+            fillRect(31, 16, 31, 20);
+
+            fillRect(34, 11, 34, 16);
+            fillRect(35, 16, 38, 16);
+
+            Deadzone(6, 16);
+            Deadzone(6, 17);
+            Deadzone(14, 16);
+            Deadzone(14, 17);
+            Deadzone(15, 16);
+            Deadzone(15, 17);
+            Deadzone(14, 19);
+            Deadzone(14, 20);
+            Deadzone(15, 19);
+            Deadzone(14, 20);
+            Deadzone(15, 20);
+            Deadzone(21, 13);
+            Deadzone(21, 14);
+            Deadzone(21, 15);
+            Deadzone(21, 16);
+            Deadzone(21, 17);
+            Deadzone(22, 13);
+            Deadzone(22, 14);
+            Deadzone(22, 15);
+            Deadzone(22, 16);
+            Deadzone(22, 17);
+            Deadzone(23, 14);
+            Deadzone(23, 15);
+            Deadzone(19, 4);
+            Deadzone(20, 4);
+
+
+            start = new Entity(10, 11);
+        }
+        if(number==11) {
+            fillRect(1, 1, 40, 25);
+            delFillRect(8, 3, 15, 5);
+            delFillRect(11, 6, 12, 13);
+            delFillRect(3, 9, 6, 18);
+            delFillRect(7, 14, 7, 18);
+            delFillRect(8, 14, 15, 20);
+            delFillRect(16, 16, 24, 17);
+            delFillRect(25, 13, 31, 22);
+            delFillRect(32, 13, 37, 17);
+            delFillRect(29, 12, 30, 9);
+            delFillRect(29, 6, 36, 8);
+            delFillRect(26, 3, 31, 7);
+            delFillRect(21, 6, 25, 7);
+            delFillRect(17, 8, 22, 10);
+            start = new Entity(3, 16);
+            if (number == 7) {
+                start = new Entity(1, 5);
+                Lines = Arrays.asList(11, 10, 11, 18);
+                DrawLines();
+                place(12, 10);
+                Lines = Arrays.asList(12, 9, 14, 9);
+                DrawLines();
+                place(14, 8);
+                Lines = Arrays.asList(15, 6, 15, 7);
+                DrawLines();
+                place(16, 5);
+                Lines = Arrays.asList(17, 4, 21, 4);
+                DrawLines();
+                Lines = Arrays.asList(22, 5, 23, 5);
+                DrawLines();
+                Lines = Arrays.asList(24, 6, 24, 7);
+                DrawLines();
+                place(25, 8);
+                Lines = Arrays.asList(26, 9, 26, 10);
+                DrawLines();
+                Lines = Arrays.asList(25, 13, 25, 19);
+                DrawLines();
+                emptyRect(21, 20, 24, 22);
+                delEmptyRect(22, 20, 23, 20);
+                Lines = Arrays.asList(19, 19, 21, 19);
+                DrawLines();
+                place(20, 20);
+                fillRect(18, 20, 19, 21);
+                Lines = Arrays.asList(15, 23, 18, 23);
+                DrawLines();
+                Lines = Arrays.asList(14, 19, 14, 22);
+                DrawLines();
+                place(15, 22);
+                place(13, 19);
+                Lines = Arrays.asList(12, 18, 12, 19);
+                DrawLines();
+
+                Lines = Arrays.asList(14, 11, 14, 17);
+                DrawLines();
+
+                quer(19, 7, 17, 9);
+                quer(17, 10, 20, 13);
+                Lines = Arrays.asList(20, 7, 22, 7);
+                DrawLines();
+                Lines = Arrays.asList(21, 13, 22, 13);
+                DrawLines();
+                Lines = Arrays.asList(23, 12, 24, 12);
+                DrawLines();
+            }
+
+            if (number == 8) {
+                start = new Entity(27, 12);
+
+                emptyRect(4, 2, 11, 9);
+                delEmptyRect(11, 7, 11, 9);
+                del(10, 9);
+                Lines = Arrays.asList(12, 2, 12, 6);
+                DrawLines();
+                emptyRect(2, 11, 8, 19);
+                delEmptyRect(8, 12, 8, 13);
+                Lines = Arrays.asList(3, 2, 3, 10);
+                DrawLines();
+                Lines = Arrays.asList(4, 10, 9, 10);
+                DrawLines();
+                place(9, 11);
+                fillRect(3, 19, 4, 24);
+                fillRect(6, 19, 15, 23);
+                fillRect(8, 14, 11, 18);
+                fillRect(13, 12, 15, 15);
+                Lines = Arrays.asList(12, 14, 12, 15);
+                DrawLines();
+                fillRect(16, 19, 37, 20);
+                fillRect(21, 14, 24, 19);
+                fillRect(28, 14, 37, 18);
+                fillRect(17, 22, 38, 24);
+                del(5, 19);
+                place(37, 13);
+                fillRect(39, 12, 40, 24);
+                fillRect(37, 3, 40, 11);
+                fillRect(1, 1, 40, 2);
+                fillRect(1, 1, 2, 25);
+                fillRect(1, 25, 40, 25);
+                Lines = Arrays.asList(16, 3, 22, 3);
+                DrawLines();
+                fillRect(25, 3, 26, 4);
+                fillRect(22, 5, 26, 6);
+                fillRect(16, 6, 18, 8);
+                fillRect(12, 9, 21, 10);
+                fillRect(30, 6, 36, 7);
+                fillRect(30, 8, 33, 11);
+                fillRect(19, 11, 21, 12);
+
+            }
+
+            if (number == 10) {
+
+                emptyRect(4, 3, 7, 6);
+                delEmptyRect(7, 4, 7, 5);
+                emptyRect(4, 6, 7, 9);
+                delEmptyRect(4, 7, 4, 8);
+
+                quer(12, 6, 11, 7);
+                quer(11, 8, 10, 9);
+                quer(10, 10, 9, 11);
+                fillRect(13, 7, 13, 7);
+                quer(13, 8, 14, 9);
+                quer(14, 10, 15, 11);
+                fillRect(11, 9, 13, 9);
+
+                fillRect(17, 2, 17, 8);
+                fillRect(20, 2, 20, 8);
+                fillRect(18, 5, 19, 5);
+
+                quer(25, 6, 24, 7);
+                quer(24, 8, 23, 9);
+                quer(23, 10, 22, 11);
+                fillRect(26, 7, 26, 7);
+                quer(26, 8, 27, 9);
+                quer(27, 10, 28, 11);
+                fillRect(24, 9, 26, 9);
+
+                fillRect(30, 2, 30, 7);
+                fillRect(34, 2, 34, 7);
+                quer(31, 3, 32, 4);
+                quer(32, 5, 33, 6);
+                place(31, 2);
+                place(33, 7);
+
+                fillRect(37, 6, 37, 11);
+
+                emptyRect(5, 14, 8, 20);
+                del(8, 20);
+                del(8, 14);
+                fillRect(6, 17, 7, 17);
+
+                fillRect(14, 18, 14, 22);
+                fillRect(15, 22, 17, 23);
+                fillRect(18, 18, 18, 22);
+                fillRect(15, 17, 17, 17);
+
+                fillRect(24, 15, 24, 22);
+                quer(25, 18, 28, 15);
+                quer(25, 19, 28, 22);
+
+                fillRect(33, 13, 33, 20);
+
+                Deadzone(12, 7);
+                Deadzone(12, 8);
+                Deadzone(25, 7);
+                Deadzone(25, 8);
+                Deadzone(31, 4);
+                Deadzone(31, 5);
+                Deadzone(33, 5);
+                Deadzone(33, 4);
+                Deadzone(6, 15);
+                Deadzone(6, 16);
+                Deadzone(7, 15);
+                Deadzone(7, 16);
+                Deadzone(6, 18);
+                Deadzone(6, 19);
+                Deadzone(7, 18);
+                Deadzone(7, 19);
+                Deadzone(15, 18);
+                Deadzone(15, 19);
+                Deadzone(15, 20);
+                Deadzone(15, 21);
+                Deadzone(16, 18);
+                Deadzone(16, 19);
+                Deadzone(16, 20);
+                Deadzone(16, 21);
+                Deadzone(17, 18);
+                Deadzone(17, 19);
+                Deadzone(17, 20);
+                Deadzone(17, 21);
+                Deadzone(25, 17);
+                Deadzone(25, 20);
+
+
+                start = new Entity(3, 12);
+
+            }
+
         }
 
-        if (number == 8) {
-            start = new Entity(27, 12);
 
-            emptyRect(4, 2, 11, 9);
-            delEmptyRect(11, 7, 11, 9);
-            del(10, 9);
-            Lines = Arrays.asList(12, 2, 12, 6);
-            DrawLines();
-            emptyRect(2, 11, 8, 19);
-            delEmptyRect(8, 12, 8, 13);
-            Lines = Arrays.asList(3, 2, 3, 10);
-            DrawLines();
-            Lines = Arrays.asList(4, 10, 9, 10);
-            DrawLines();
-            place(9, 11);
-            fillRect(3, 19, 4, 24);
-            fillRect(6, 19, 15, 23);
-            fillRect(8, 14, 11, 18);
-            fillRect(13, 12, 15, 15);
-            Lines = Arrays.asList(12, 14, 12, 15);
-            DrawLines();
-            fillRect(16, 19, 37, 20);
-            fillRect(21, 14, 24, 19);
-            fillRect(28, 14, 37, 18);
-            fillRect(17, 22, 38, 24);
-            del(5, 19);
-            place(37, 13);
-            fillRect(39, 12, 40, 24);
-            fillRect(37, 3, 40, 11);
-            fillRect(1, 1, 40, 2);
-            fillRect(1, 1, 2, 25);
-            fillRect(1, 25, 40, 25);
-            Lines = Arrays.asList(16, 3, 22, 3);
-            DrawLines();
-            fillRect(25, 3, 26, 4);
-            fillRect(22, 5, 26, 6);
-            fillRect(16, 6, 18, 8);
-            fillRect(12, 9, 21, 10);
-            fillRect(30, 6, 36, 7);
-            fillRect(30, 8, 33, 11);
-            fillRect(19, 11, 21, 12);
-
-        }
     }
 
     public void DrawLines() {
