@@ -14,6 +14,7 @@ public class Main  {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400  , 400);
         frame.setBackground(new Color(0, 0, 0));
+        frame.requestFocus();
         frame.setVisible(true);
         Menu menu = new Menu(frame);
 

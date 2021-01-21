@@ -52,9 +52,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static String menuP = "leer";
     public static Graphics gr;
 
+
     public Game(JFrame frame, int WsW, int WsH, int Cs, int Ss, Menu b) {  //Setup
-        frame.requestFocus();
         back = b;
+        frame.addKeyListener(this);
         this.frame = frame;
         WindowsizeW = WsW; //Wie viele Zellen es im Fenster gibt
         WindowsizeH = WsH; //Wie viele Zellen es im Fenster gibt
@@ -89,9 +90,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
         frame.setSize(Width + 16, Height + 39);
         frame.getContentPane().setBackground(new Color(0, 0, 0));
         frame.getContentPane().add(this);
-        frame.getContentPane().requestFocusInWindow();
-        frame.getContentPane();
-        //setFocusable(true); //Ob das Fenster angeklickt werden kann
+        frame.hasFocus();
+        frame.isDoubleBuffered();
+
+
         frame.requestFocus();
         Cells = new String[WindowsizeW + 2][WindowsizeH + 2]; //+2 damit das Spiel am Rand nicht abstürzt (1 links extra, 1 rechts extra)
         lvl.doIt(Lev);
@@ -116,6 +118,29 @@ public class Game extends Canvas implements Runnable, KeyListener {
             e.printStackTrace();
         }
     }
+
+
+   /* public void update(Graphics g) {
+        Dimension size = getSize();
+        if (doubleBuffer == null ||
+                doubleBuffer.getWidth(this) != size.width ||
+                doubleBuffer.getHeight(this) != size.height)
+        {
+            doubleBuffer = createImage(size.width, size.height);
+        }
+        if (doubleBuffer != null) {
+            // paint to double buffer
+            Graphics g2 = doubleBuffer.getGraphics();
+            paint(g2);
+            g2.dispose();
+            // copy double buffer to screen
+            g.drawImage(doubleBuffer, 0, 0, null);
+        }
+        else {
+            // couldn't create double buffer, just paint to screen
+            paint(g);
+        }
+    }*/
 
 
     @Override
@@ -286,6 +311,7 @@ gr.drawString("Fuck this", 100, 100);*/
                 Cells[snake.get(0).x][snake.get(0).y] = "Body"; //Die zelle in die gegangen wurde soll auf "besetzt" gesetzt werden
 
                 repaint();//Änderungen anzeigen
+
             }
             try { //try catch wird bei manchen methoden benötigt, ansonsten laufen die anscheinend nich.
                 thread.sleep(speed); //Wie schnell das Spiel ist: Alle (speed) millisekunden wird die Methode ausgeführt, aka 1/(speed) frames pro sekunde. Beispiel: speed=100 -> 10 Bilder pro sekunde

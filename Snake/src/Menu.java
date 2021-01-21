@@ -1,8 +1,12 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-public class Menu extends Panel {
+public class Menu extends Panel implements ActionListener {
 
     JPanel titleNamePanel;
     JLabel title;
@@ -10,17 +14,36 @@ public class Menu extends Panel {
     JFrame frame;
     //Graphic Options
     public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
-    public int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH = 27; //Wie viele Zellen es im Fenster gibt
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static boolean menu = true;
-    public int StartLevel = 0;
+    public static int StartLevel = 0;
+    public  JButton startButton;
+
+    public static JPanel panel_levels;
+    public static JButton button_0;
+    public static JButton button_1;
+    public static JButton button_2;
+    public static JButton button_3;
+    public static JButton button_4;
+    public static JButton button_5;
+    public static JButton button_6;
+    public static JButton button_7;
+    public static JButton button_8;
+    public static JButton button_9;
+    public static JButton button_10;
+    public static JButton button_11;
+    public static JButton button_12;
+
+
 
     public Menu(JFrame Frame) {
         frame = Frame;
 
-        if(menu) {
-            StartGameActionListener startGameActionListener = new StartGameActionListener(this);
+        if (menu)
+        {
+            JButton levelsButton = new JButton("Levels");
 
             Font titlesFont = new Font("Arial", Font.BOLD, 50);
             Font buttonsFont = new Font("Arial", Font.PLAIN, 20);
@@ -28,42 +51,254 @@ public class Menu extends Panel {
             titleNamePanel = new JPanel();
             title = new JLabel("Snake");
 
-            this.add(titleNamePanel);
-            titleNamePanel.add(title);
-
             title.setForeground(new Color(0, 255, 32));
             title.setFont(titlesFont);
 
             titleNamePanel.setBackground(Color.black);
+            startButton = new JButton("Start");
+
+            title.setBounds(125,20,200,100);
+            startButton.setBounds(45,120,300,60);
+            levelsButton.setBounds(45,200,300,60);
+
+            startButton.addActionListener(this);
+            levelsButton.addActionListener(this);
+
+            levelsButton.setBackground(new Color(0, 0, 0));
+            levelsButton.setForeground(new Color(255, 255, 255));
+            levelsButton.setFont(buttonsFont);
+
+            startButton.setBackground(new Color(0, 0, 0));
+            startButton.setForeground(new Color(255, 255, 255));
+            startButton.setFont(buttonsFont);
+            startButton.setBorder(new LineBorder(Color.GREEN));
+            levelsButton.setBorder(new LineBorder(Color.GREEN));
+
+            titleNamePanel.setLayout(null);
+            titleNamePanel.add(title);
+            titleNamePanel.add(startButton);
+            titleNamePanel.add(levelsButton);
 
 
 
-
-       Button startButton = new Button("Start");
-        this.add(startButton);
-        startButton.addActionListener(startGameActionListener);
-        startButton.setBackground(new Color(0, 0, 0));
-        startButton.setForeground(new Color(255, 255, 255));
-        startButton.setFont(buttonsFont);
+            this.add(titleNamePanel);
+            frame.add(this);
 
 
-        this.add(new Button("Levels"));
-        frame.add(this);
+            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        }else{
-            startGame();
+        }
+        else {
+            startGame(StartLevel);
         }
 
 
     }
 
-    public void startGame() {
+    public void startGame(int StartLevel) {
         game = new Game(frame, WindowsizeW, WindowsizeH, Cellsize, Spacesize, this);
         game.init(StartLevel);
         game.start();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getActionCommand().equals("Start"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(StartLevel);
+        }
+        else if(e.getActionCommand().equals("Levels"))
+        {
+            levels();
+        }
+        else if(e.getActionCommand().equals("Level 0"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(0);
+        }
+        else if(e.getActionCommand().equals("Level 1"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(1);
+        }
+        else if(e.getActionCommand().equals("Level 2"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(2);
+        }
+        else if(e.getActionCommand().equals("Level 3"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(3);
+        }
+        else if(e.getActionCommand().equals("Level 4"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(4);
+        }
+        else if(e.getActionCommand().equals("Level 5"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(5);
+        }
+        else if(e.getActionCommand().equals("Level 6"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(6);
+        }
+        else if(e.getActionCommand().equals("Level 7"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(7);
+        }
+        else if(e.getActionCommand().equals("Level 8"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(8);
+        }
+        else if(e.getActionCommand().equals("Level 9"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(9);
+        }
+        else if(e.getActionCommand().equals("Level 10"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(10);
+        }
+        else if(e.getActionCommand().equals("Level 11"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(11);
+        }
+        else if(e.getActionCommand().equals("Level 12"))
+        {
+            this.setVisible(false);
+            menu = false;
+            this.startGame(12);
+        }
+
+    }
+
+    public void levels()
+    {
+        titleNamePanel.removeAll();
+        titleNamePanel.setVisible(false);
+        panel_levels = new JPanel();
+        button_0 = new JButton("Level 0");
+        button_1 = new JButton("Level 1");
+        button_2 = new JButton("Level 2");
+        button_3 = new JButton("Level 3");
+        button_4 = new JButton("Level 4");
+        button_5 = new JButton("Level 5");
+        button_6 = new JButton("Level 6");
+        button_7 = new JButton("Level 7");
+        button_8 = new JButton("Level 8");
+        button_9 = new JButton("Level 9");
+        button_10 = new JButton("Level 10");
+        button_11 = new JButton("Level 11");
+        button_12 = new JButton("Level 12");
+
+        button_0.addActionListener(this);
+        button_1.addActionListener(this);
+        button_2.addActionListener(this);
+        button_3.addActionListener(this);
+        button_4.addActionListener(this);
+        button_5.addActionListener(this);
+        button_6.addActionListener(this);
+        button_7.addActionListener(this);
+        button_8.addActionListener(this);
+        button_9.addActionListener(this);
+        button_10.addActionListener(this);
+        button_11.addActionListener(this);
+        button_12.addActionListener(this);
+
+        button_1.setBounds(15,20,177,50);
+        button_2.setBounds(193,20,177,50);
+
+        button_3.setBounds(15,70,177,50);
+        button_4.setBounds(193,70,177,50);
+        button_5.setBounds(15,120,177,50);
+        button_6.setBounds(193,120,177,50);
+        button_7.setBounds(15,170,177,50);
+        button_8.setBounds(193,170,177,50);
+
+        button_10.setBounds(193,220,177,50);
+        button_9.setBounds(15,220,177,50);
+        button_12.setBounds(193,270,177,50);
+        button_11.setBounds(15,270,177,50);
+
+
+
+        button_0.setBackground(new Color(0, 0, 0));
+        button_0.setForeground(new Color(255, 255, 255));
+        button_1.setBackground(new Color(0, 0, 0));
+        button_1.setForeground(new Color(255, 255, 255));
+        button_2.setBackground(new Color(0, 0, 0));
+        button_2.setForeground(new Color(255, 255, 255));
+        button_3.setBackground(new Color(0, 0, 0));
+        button_3.setForeground(new Color(255, 255, 255));
+        button_4.setBackground(new Color(0, 0, 0));
+        button_4.setForeground(new Color(255, 255, 255));
+        button_5.setBackground(new Color(0, 0, 0));
+        button_5.setForeground(new Color(255, 255, 255));
+        button_6.setBackground(new Color(0, 0, 0));
+        button_6.setForeground(new Color(255, 255, 255));
+        button_7.setBackground(new Color(0, 0, 0));
+        button_7.setForeground(new Color(255, 255, 255));
+        button_8.setBackground(new Color(0, 0, 0));
+        button_8.setForeground(new Color(255, 255, 255));
+        button_9.setBackground(new Color(0, 0, 0));
+        button_9.setForeground(new Color(255, 255, 255));
+        button_10.setBackground(new Color(0, 0, 0));
+        button_10.setForeground(new Color(255, 255, 255));
+        button_11.setBackground(new Color(0, 0, 0));
+        button_11.setForeground(new Color(255, 255, 255));
+        button_12.setBackground(new Color(0, 0, 0));
+        button_12.setForeground(new Color(255, 255, 255));
+
+
+        button_1.setBorder(new LineBorder(Color.GREEN));
+        button_2.setBorder(new LineBorder(Color.GREEN));
+        /* for all buttons  */
+
+
+        panel_levels.setLayout(null);
+        panel_levels.setBackground(Color.black);
+        panel_levels.setSize(getParent().getSize());
+        panel_levels.add(button_0);
+        panel_levels.add(button_1);
+        panel_levels.add(button_2);
+        panel_levels.add(button_3);
+        panel_levels.add(button_4);
+        panel_levels.add(button_5);
+        panel_levels.add(button_6);
+        panel_levels.add(button_7);
+        panel_levels.add(button_8);
+        panel_levels.add(button_9);
+        panel_levels.add(button_10);
+        panel_levels.add(button_11);
+        panel_levels.add(button_12);
+        panel_levels.setVisible(true);
+
+        this.add(panel_levels);
+    }
+
+
 
 }
