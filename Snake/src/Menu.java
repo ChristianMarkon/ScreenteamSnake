@@ -19,7 +19,8 @@ public class Menu extends Panel implements ActionListener {
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static boolean menu = true;
     public static int StartLevel = 0;
-    public  JButton startButton;
+    public JButton startButton;
+
 
     public static JPanel panel_levels;
     public static JButton button_0;
@@ -37,40 +38,39 @@ public class Menu extends Panel implements ActionListener {
     public static JButton button_12;
 
 
-
     public Menu(JFrame Frame) {
         frame = Frame;
 
-        if (menu)
-        {
-            JButton levelsButton = new JButton("Levels");
-
+        if (menu) {
             Font titlesFont = new Font("Arial", Font.BOLD, 50);
             Font buttonsFont = new Font("Arial", Font.PLAIN, 20);
 
             titleNamePanel = new JPanel();
             title = new JLabel("Snake");
-
+            titleNamePanel.setBackground(Color.black);
             title.setForeground(new Color(0, 255, 32));
             title.setFont(titlesFont);
 
-            titleNamePanel.setBackground(Color.black);
-            startButton = new JButton("Start");
 
-            title.setBounds(125,20,200,100);
-            startButton.setBounds(45,120,300,60);
-            levelsButton.setBounds(45,200,300,60);
+
+            startButton = new JButton("Start");
+            JButton levelsButton = new JButton("Levels");
+
+            title.setBounds(125, 20, 200, 100);
+            startButton.setBounds(45, 120, 300, 60);
+            levelsButton.setBounds(45, 200, 300, 60);
 
             startButton.addActionListener(this);
             levelsButton.addActionListener(this);
 
+            startButton.setBackground(new Color(0, 0, 0));
+            startButton.setForeground(new Color(255, 255, 255));
+            startButton.setFont(buttonsFont);
             levelsButton.setBackground(new Color(0, 0, 0));
             levelsButton.setForeground(new Color(255, 255, 255));
             levelsButton.setFont(buttonsFont);
 
-            startButton.setBackground(new Color(0, 0, 0));
-            startButton.setForeground(new Color(255, 255, 255));
-            startButton.setFont(buttonsFont);
+
             startButton.setBorder(new LineBorder(Color.GREEN));
             levelsButton.setBorder(new LineBorder(Color.GREEN));
 
@@ -79,20 +79,16 @@ public class Menu extends Panel implements ActionListener {
             titleNamePanel.add(startButton);
             titleNamePanel.add(levelsButton);
 
-
+            startButton.setFocusPainted(false);
 
             this.add(titleNamePanel);
             frame.add(this);
 
-
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        }
-        else {
+        } else {
             startGame(StartLevel);
         }
-
-
     }
 
     public void startGame(int StartLevel) {
@@ -102,92 +98,62 @@ public class Menu extends Panel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getActionCommand().equals("Start"))
-        {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("Start")) {
             this.setVisible(false);
             menu = false;
             this.startGame(StartLevel);
-        }
-        else if(e.getActionCommand().equals("Levels"))
-        {
+        } else if (e.getActionCommand().equals("Levels")) {
             levels();
-        }
-        else if(e.getActionCommand().equals("Level 0"))
-        {
+        } else if (e.getActionCommand().equals("Level 0")) {
             this.setVisible(false);
             menu = false;
             this.startGame(0);
-        }
-        else if(e.getActionCommand().equals("Level 1"))
-        {
+        } else if (e.getActionCommand().equals("1. Playground")) {
             this.setVisible(false);
             menu = false;
             this.startGame(1);
-        }
-        else if(e.getActionCommand().equals("Level 2"))
-        {
+        } else if (e.getActionCommand().equals("2. Squiggles")) {
             this.setVisible(false);
             menu = false;
             this.startGame(2);
-        }
-        else if(e.getActionCommand().equals("Level 3"))
-        {
+        } else if (e.getActionCommand().equals("3. Cave 1")) {
             this.setVisible(false);
             menu = false;
             this.startGame(3);
-        }
-        else if(e.getActionCommand().equals("Level 4"))
-        {
+        } else if (e.getActionCommand().equals("4. Shapes")) {
             this.setVisible(false);
             menu = false;
             this.startGame(4);
-        }
-        else if(e.getActionCommand().equals("Level 5"))
-        {
+        } else if (e.getActionCommand().equals("5. Snake easy")) {
             this.setVisible(false);
             menu = false;
             this.startGame(5);
-        }
-        else if(e.getActionCommand().equals("Level 6"))
-        {
+        } else if (e.getActionCommand().equals("6. Cave 2")) {
             this.setVisible(false);
             menu = false;
             this.startGame(6);
-        }
-        else if(e.getActionCommand().equals("Level 7"))
-        {
+        } else if (e.getActionCommand().equals("7. Kinda sus")) {
             this.setVisible(false);
             menu = false;
             this.startGame(7);
-        }
-        else if(e.getActionCommand().equals("Level 8"))
-        {
+        } else if (e.getActionCommand().equals("8. Snake hard")) {
             this.setVisible(false);
             menu = false;
             this.startGame(8);
-        }
-        else if(e.getActionCommand().equals("Level 9"))
-        {
+        } else if (e.getActionCommand().equals("9. Credits 1")) {
             this.setVisible(false);
             menu = false;
             this.startGame(9);
-        }
-        else if(e.getActionCommand().equals("Level 10"))
-        {
+        } else if (e.getActionCommand().equals("10. Credits 2")) {
             this.setVisible(false);
             menu = false;
             this.startGame(10);
-        }
-        else if(e.getActionCommand().equals("Level 11"))
-        {
+        } else if (e.getActionCommand().equals("11. Credits 3")) {
             this.setVisible(false);
             menu = false;
             this.startGame(11);
-        }
-        else if(e.getActionCommand().equals("Level 12"))
-        {
+        } else if (e.getActionCommand().equals("12. Pacman")) {
             this.setVisible(false);
             menu = false;
             this.startGame(12);
@@ -195,24 +161,23 @@ public class Menu extends Panel implements ActionListener {
 
     }
 
-    public void levels()
-    {
+    public void levels() {
         titleNamePanel.removeAll();
         titleNamePanel.setVisible(false);
         panel_levels = new JPanel();
         button_0 = new JButton("Level 0");
-        button_1 = new JButton("Level 1");
-        button_2 = new JButton("Level 2");
-        button_3 = new JButton("Level 3");
-        button_4 = new JButton("Level 4");
-        button_5 = new JButton("Level 5");
-        button_6 = new JButton("Level 6");
-        button_7 = new JButton("Level 7");
-        button_8 = new JButton("Level 8");
-        button_9 = new JButton("Level 9");
-        button_10 = new JButton("Level 10");
-        button_11 = new JButton("Level 11");
-        button_12 = new JButton("Level 12");
+        button_1 = new JButton("1. Playground");
+        button_2 = new JButton("2. Squiggles");
+        button_3 = new JButton("3. Cave 1");
+        button_4 = new JButton("4. Shapes");
+        button_5 = new JButton("5. Snake easy");
+        button_6 = new JButton("6. Cave 2");
+        button_7 = new JButton("7. Kinda sus");
+        button_8 = new JButton("8. Snake hard");
+        button_9 = new JButton("9. Credits 1");
+        button_10 = new JButton("10. Credits 2");
+        button_11 = new JButton("11. Credits 3");
+        button_12 = new JButton("12. Pacman");
 
         button_0.addActionListener(this);
         button_1.addActionListener(this);
@@ -228,21 +193,20 @@ public class Menu extends Panel implements ActionListener {
         button_11.addActionListener(this);
         button_12.addActionListener(this);
 
-        button_1.setBounds(15,20,177,50);
-        button_2.setBounds(193,20,177,50);
+        button_1.setBounds(15, 20, 177, 50);
+        button_2.setBounds(193, 20, 177, 50);
 
-        button_3.setBounds(15,70,177,50);
-        button_4.setBounds(193,70,177,50);
-        button_5.setBounds(15,120,177,50);
-        button_6.setBounds(193,120,177,50);
-        button_7.setBounds(15,170,177,50);
-        button_8.setBounds(193,170,177,50);
+        button_3.setBounds(15, 70, 177, 50);
+        button_4.setBounds(193, 70, 177, 50);
+        button_5.setBounds(15, 120, 177, 50);
+        button_6.setBounds(193, 120, 177, 50);
+        button_7.setBounds(15, 170, 177, 50);
+        button_8.setBounds(193, 170, 177, 50);
 
-        button_10.setBounds(193,220,177,50);
-        button_9.setBounds(15,220,177,50);
-        button_12.setBounds(193,270,177,50);
-        button_11.setBounds(15,270,177,50);
-
+        button_10.setBounds(193, 220, 177, 50);
+        button_9.setBounds(15, 220, 177, 50);
+        button_12.setBounds(193, 270, 177, 50);
+        button_11.setBounds(15, 270, 177, 50);
 
 
         button_0.setBackground(new Color(0, 0, 0));
@@ -270,12 +234,21 @@ public class Menu extends Panel implements ActionListener {
         button_11.setBackground(new Color(0, 0, 0));
         button_11.setForeground(new Color(255, 255, 255));
         button_12.setBackground(new Color(0, 0, 0));
-        button_12.setForeground(new Color(255, 255, 255));
+        button_12.setForeground(new Color(0, 0, 0));
 
 
         button_1.setBorder(new LineBorder(Color.GREEN));
         button_2.setBorder(new LineBorder(Color.GREEN));
-        /* for all buttons  */
+        button_3.setBorder(new LineBorder(Color.GREEN));
+        button_4.setBorder(new LineBorder(Color.GREEN));
+        button_5.setBorder(new LineBorder(Color.GREEN));
+        button_6.setBorder(new LineBorder(Color.GREEN));
+        button_7.setBorder(new LineBorder(Color.GREEN));
+        button_8.setBorder(new LineBorder(Color.GREEN));
+        button_9.setBorder(new LineBorder(Color.GREEN));
+        button_10.setBorder(new LineBorder(Color.GREEN));
+        button_11.setBorder(new LineBorder(Color.GREEN));
+        button_12.setBorder(new LineBorder(Color.BLACK));
 
 
         panel_levels.setLayout(null);
@@ -298,7 +271,6 @@ public class Menu extends Panel implements ActionListener {
 
         this.add(panel_levels);
     }
-
 
 
 }

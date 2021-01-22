@@ -20,11 +20,11 @@ Hier ein paar INFOS:
 			1   playground
 			2   squiggles
 			3   cave 1
-			4   formen
-			5   snek
+			4   shapes
+			5   snake easy
 			6   cave 2
 			7   kinda sus
-			8   snake
+			8   snake hard
 			9   credits 1
 			10  credits 2
 			11  credits 3
