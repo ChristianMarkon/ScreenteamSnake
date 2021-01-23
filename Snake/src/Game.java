@@ -368,9 +368,7 @@ gr.drawString("Fuck this", 100, 100);*/
 
         }
         if (key == KeyEvent.VK_R) {
-
             init(CurrentLevel);
-
         }
 
 

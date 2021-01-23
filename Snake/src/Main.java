@@ -1,10 +1,14 @@
 //DO: Apple spawn, pickup, Wait for input on start, Bestenliste? Multiplayer? Zeit/Speedrun? custom border? Portals? Levels? Enemies? Variable Speed? Special Pickups? Quests? Timer? Dash? Abilities?
 //Blerghhh
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Main  {
+
+
 
 
 
@@ -17,6 +21,8 @@ public class Main  {
         frame.requestFocus();
         frame.setVisible(true);
         Menu menu = new Menu(frame);
+
+
 
 
     }
