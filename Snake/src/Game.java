@@ -1,12 +1,11 @@
-import javax.sound.sampled.Port;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.*;
-import java.util.List;
+import java.util.Random;
+import java.util.ArrayList;
+
+
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
@@ -38,7 +37,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public ArrayList<Entity> Apfel;
     public ArrayList<Entity> Portal;
     Color gre = new Color(0, 255, 32); //Die Farbe der Schlange
-    //public int tick = 0; //Nicht verwendet, eventuell zum speichern der Zeit                               FIX
     public String direction; //Die richtung in die die Schlange als nächstes geht
     public String lastdir; //Die Richtung in die die Schlagen zuletzt gegangen ist
     public int Growth; //Wie groß die Schlange am Anfang ist, wird auch verwendet für wie viele Teile noch generiert werden sollen nachdem man einen Apfel gegessen hat
@@ -47,10 +45,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public Random rand = new Random();
     public Level lvl = new Level(this);
     boolean end;
-
     public boolean paused;
-    public static String menuP = "leer";
-    public static Graphics gr;
+
 
 
     public Game(JFrame frame, int WsW, int WsH, int Cs, int Ss, Menu b) {  //Setup
@@ -68,14 +64,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     public void init(int Lev) {
-       /* while (Width > MaxW) {
-            WindowsizeW--;
-            Width = (Cellsize + Spacesize) * WindowsizeW + Spacesize;
-        }
-        while (Height > MaxH) {
-            WindowsizeH--;
-            Height = (Cellsize + Spacesize) * WindowsizeH + Spacesize;
-        }*/
         CurrentLevel = Lev;
         snake = new ArrayList<Entity>(0); //Die Arrayliste die den Zustand und die Länge der Schlange selbst speichert
         blocks = new ArrayList<Entity>(0);
@@ -105,18 +93,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     public void start() {
-        thread = new Thread(this); //neuer thread. verstehe nicht ganz genau wie das tatsächlich funktioniert.
+        thread = new Thread(this);
         thread.start(); //der thread soll anfangen seine aufgaben zu machen, das spiel wird jetzt gestartet
-    }
-
-
-    public void stop() {//ääähhhhhh... i guess der thread muss wissen was er zu machen hat wenn er vorbei is? oder man kann damit den thread beenden?
-        running = false; //spiel wird angehalten
-        try {
-            thread.join(); //.... ganz ehrlich keine ahnung. soweit auch erstmal nich wichtig denk ich mal
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -140,7 +118,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
             // couldn't create double buffer, just paint to screen
             paint(g);
         }
-    }*/
+    }
+    */
 
 
     @Override
@@ -193,8 +172,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 }
             }
         }
-  /*      gr.setColor(Color.YELLOW);
-gr.drawString("Fuck this", 100, 100);*/
+
+
         //Schlangenteile Zeichnen
         gr.setColor(gre);
         for (int i = 0; i < snake.size(); i++) { //Elemente der Arrayliste durchlaufen
@@ -381,8 +360,7 @@ gr.drawString("Fuck this", 100, 100);*/
 
 
     @Override
-    public void keyTyped(KeyEvent k) { //äh?
-
+    public void keyTyped(KeyEvent k) {
     }
 
     public void createBody(int X, int Y) { //hiermit erzeugt man ein neues Objekt des typs "Body". damit mach ich neue körperteile wenn die schlange wachsen soll
@@ -408,7 +386,6 @@ gr.drawString("Fuck this", 100, 100);*/
 
         JLabel label = new JLabel("You Lost !!");
         label.setForeground(new Color(255, 255, 255));
-        //label.setBackground(Color.pink);
         label.setSize(100, 100);
         label.setLayout(null);
         label.setVisible(true);
@@ -417,7 +394,6 @@ gr.drawString("Fuck this", 100, 100);*/
 
         JLabel label1 = new JLabel("To start the game please press R");
         label1.setForeground(new Color(255, 255, 255));
-        //label.setBackground(Color.pink);
         label1.setSize(100, 100);
         label1.setLayout(null);
         label1.setVisible(true);
@@ -426,7 +402,6 @@ gr.drawString("Fuck this", 100, 100);*/
 
         JLabel label2 = new JLabel("To end the Game Press Esc");
         label2.setForeground(new Color(255, 255, 255));
-        //label.setBackground(Color.pink);
         label2.setSize(100, 100);
         label2.setLayout(null);
         label2.setVisible(true);
@@ -435,7 +410,6 @@ gr.drawString("Fuck this", 100, 100);*/
 
 
         JPanel panel = new JPanel();
-        //panel.setBounds(500,500,500,500);
         panel.setBackground(new Color(0, 0, 0));
         panel.setSize(getParent().getSize());
         panel.setVisible(true);

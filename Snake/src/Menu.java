@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.Image;
+
 
 public class Menu extends Panel implements ActionListener {
 
@@ -12,17 +13,20 @@ public class Menu extends Panel implements ActionListener {
     JLabel title;
     Game game;
     JFrame frame;
+
     //Graphic Options
     public int WindowsizeW = 40; //Wie viele Zellen es im Fenster gibt
-    public int WindowsizeH = 27; //Wie viele Zellen es im Fenster gibt
+    public int WindowsizeH = 25; //Wie viele Zellen es im Fenster gibt
     private static int Cellsize = 30; //Wie groß die Zellen sind
     private static int Spacesize = 6; //Wie groß der Abstand zwischen den Zellen ist
     private static boolean menu = true;
     public static int StartLevel = 0;
     public JButton startButton;
 
-
+    //Panel für Levels
     public static JPanel panel_levels;
+
+    //Level Buttons
     public static JButton button_0;
     public static JButton button_1;
     public static JButton button_2;
@@ -51,8 +55,6 @@ public class Menu extends Panel implements ActionListener {
             title.setForeground(new Color(0, 255, 32));
             title.setFont(titlesFont);
 
-
-
             startButton = new JButton("Start");
             JButton levelsButton = new JButton("Levels");
 
@@ -69,7 +71,6 @@ public class Menu extends Panel implements ActionListener {
             levelsButton.setBackground(new Color(0, 0, 0));
             levelsButton.setForeground(new Color(255, 255, 255));
             levelsButton.setFont(buttonsFont);
-
 
             startButton.setBorder(new LineBorder(Color.GREEN));
             levelsButton.setBorder(new LineBorder(Color.GREEN));
@@ -98,17 +99,13 @@ public class Menu extends Panel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { //Methode für die Aktion von den Buttons
         if (e.getActionCommand().equals("Start")) {
             this.setVisible(false);
             menu = false;
             this.startGame(StartLevel);
         } else if (e.getActionCommand().equals("Levels")) {
             levels();
-        } else if (e.getActionCommand().equals("Level 0")) {
-            this.setVisible(false);
-            menu = false;
-            this.startGame(0);
         } else if (e.getActionCommand().equals("1. Playground")) {
             this.setVisible(false);
             menu = false;
@@ -165,6 +162,7 @@ public class Menu extends Panel implements ActionListener {
         titleNamePanel.removeAll();
         titleNamePanel.setVisible(false);
         panel_levels = new JPanel();
+
         button_0 = new JButton("Level 0");
         button_1 = new JButton("1. Playground");
         button_2 = new JButton("2. Squiggles");
@@ -251,9 +249,9 @@ public class Menu extends Panel implements ActionListener {
         button_12.setBorder(new LineBorder(Color.BLACK));
 
 
-        panel_levels.setLayout(null);
+        panel_levels.setLayout(null); //damit man selber entscheiden kann wo man die Buttons platziert
+        panel_levels.setSize(getParent().getSize()); //Panel nimmt die größe von dem Frame
         panel_levels.setBackground(Color.black);
-        panel_levels.setSize(getParent().getSize());
         panel_levels.add(button_0);
         panel_levels.add(button_1);
         panel_levels.add(button_2);
@@ -269,7 +267,7 @@ public class Menu extends Panel implements ActionListener {
         panel_levels.add(button_12);
         panel_levels.setVisible(true);
 
-        this.add(panel_levels);
+        this.add(panel_levels); //panel wird dem Frame hinzugefügt
     }
 
 

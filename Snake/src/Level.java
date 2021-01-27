@@ -16,7 +16,7 @@ public class Level {
     public void doIt(int number) {
         clear();
         start = new Entity(3, 4);
-        Req = 15;
+        Req = 6;
         if (gam.WandTod) {
             emptyRect(0, 0, gam.WindowsizeW + 1, gam.WindowsizeH + 1);
         }
@@ -80,7 +80,7 @@ public class Level {
             emptyRect(27, 20, 29, 20);
             deadzone(28, 19);
             deadzone(28, 17);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
             start = new Entity(11, 12);
         }
 
@@ -132,7 +132,7 @@ public class Level {
             emptyRect(16, 17, 16, 22);
             emptyRect(17, 23, 18, 23);
             emptyRect(19, 22, 19, 21);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
         }
 
         if (number == 3) {//Cave 1
@@ -150,8 +150,8 @@ public class Level {
             delFillRect(26, 3, 31, 7);
             delFillRect(21, 6, 25, 7);
             delFillRect(17, 8, 22, 10);
-            delEmptyRect(16,3, 20 , 3);
-            delEmptyRect(20,4, 25 , 4);
+            delEmptyRect(16, 3, 20, 3);
+            delEmptyRect(20, 4, 25, 4);
 
             start = new Entity(3, 16);
         }
@@ -185,7 +185,7 @@ public class Level {
             emptyRect(32, 21, 34, 22);
 
             start = new Entity(6, 7);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
         }
 
         if (number == 5) {//Snek
@@ -256,13 +256,13 @@ public class Level {
             place(32, 23);
             place(33, 23);
             deadFillRect(12, 5, 18, 4);
-            deadzone(14,3);
+            deadzone(14, 3);
             deadzone(16, 3);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
             start = new Entity(24, 4);
         }
 
-        if(number==6){//Cave 2
+        if (number == 6) {//Cave 2
             start = new Entity(27, 12);
 
             emptyRect(4, 2, 11, 9);
@@ -353,7 +353,7 @@ public class Level {
             DrawLines();
             Lines = Arrays.asList(23, 12, 24, 12);
             DrawLines();
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
         }
 
         if (number == 8) {//Snake
@@ -500,7 +500,7 @@ public class Level {
             deadzone(21, 14);
             deadzone(21, 15);
             start = new Entity(25, 6);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
         }
 
         if (number == 9) { //Credits Chris, Abdul
@@ -664,82 +664,81 @@ public class Level {
             deadzone(17, 21);
             deadzone(25, 17);
             deadzone(25, 20);
-            delEmptyRect(0,0,41,26);
+            delEmptyRect(0, 0, 41, 26);
 
             start = new Entity(3, 12);
         }
 
-        if(number == 11)
-        {
-            fillRect(19,3,21,3);
-            fillRect(22,2,23,2);
-            fillRect(24,3,26,3);
-            fillRect(27,4,28,4);
-            quer(29,5,31,7);
-            quer(32,7,34,9);
-            fillRect(33,11,35,11);
-            fillRect(27,10,32,10);
-            quer(28,10,26,12);
-            quer(24,9,26,11);
-            deadzone(25,11);
+        if (number == 11) {
+            fillRect(19, 3, 21, 3);
+            fillRect(22, 2, 23, 2);
+            fillRect(24, 3, 26, 3);
+            fillRect(27, 4, 28, 4);
+            quer(29, 5, 31, 7);
+            quer(32, 7, 34, 9);
+            fillRect(33, 11, 35, 11);
+            fillRect(27, 10, 32, 10);
+            quer(28, 10, 26, 12);
+            quer(24, 9, 26, 11);
+            deadzone(25, 11);
 
-            fillRect(25,12,22,12);
-            fillRect(19,11,21,11);
-            fillRect(11,12,18,12);
-            place(15,11);
-            place(10,11);
-            fillRect(8,11,7,10);
-            del(8,10);
-            deadzone(8,10);
+            fillRect(25, 12, 22, 12);
+            fillRect(19, 11, 21, 11);
+            fillRect(11, 12, 18, 12);
+            place(15, 11);
+            place(10, 11);
+            fillRect(8, 11, 7, 10);
+            del(8, 10);
+            deadzone(8, 10);
 
-            fillRect(8,9,10,9);
-            fillRect(11,7,11,8);
-            fillRect(10,5,10,6);
-            place(12,5);
-            fillRect(13,6,14,6);
-            fillRect(15,5,16,5);
-            fillRect(17,4,18,4);
+            fillRect(8, 9, 10, 9);
+            fillRect(11, 7, 11, 8);
+            fillRect(10, 5, 10, 6);
+            place(12, 5);
+            fillRect(13, 6, 14, 6);
+            fillRect(15, 5, 16, 5);
+            fillRect(17, 4, 18, 4);
 
-            place(13,9);
-            place(16,9);
+            place(13, 9);
+            place(16, 9);
 
-            quer(20,5,18,5);
-            fillRect(21,6,21,8);
-            deadzone(20,6);
+            quer(20, 5, 18, 5);
+            fillRect(21, 6, 21, 8);
+            deadzone(20, 6);
 
             quer(7, 15, 6, 16);
             quer(6, 17, 5, 18);
             quer(5, 19, 4, 20);
             fillRect(8, 16, 8, 18);
-            place(9,18);
+            place(9, 18);
             quer(9, 19, 10, 20);
             fillRect(6, 18, 7, 18);
-            deadEmptyRect(7,16,7,17);
+            deadEmptyRect(7, 16, 7, 17);
 
-            fillRect(14,18,15,19);
-            fillRect(14,20,14,23);
-            fillRect(16,20,16,21);
-            fillRect(17,22,18,23);
-            fillRect(18,18,18,22);
-            deadEmptyRect(15,20,15,21);
-            deadEmptyRect(17,20,17,21);
+            fillRect(14, 18, 15, 19);
+            fillRect(14, 20, 14, 23);
+            fillRect(16, 20, 16, 21);
+            fillRect(17, 22, 18, 23);
+            fillRect(18, 18, 18, 22);
+            deadEmptyRect(15, 20, 15, 21);
+            deadEmptyRect(17, 20, 17, 21);
 
-            fillRect(23,15,24,16);
-            fillRect(23,17,23,20);
-            fillRect(25,17,25,18);
-            fillRect(26,19,27,20);
-            fillRect(27,18,27,15);
-            deadEmptyRect(25,17,26,18);
-            deadEmptyRect(25,17,26,18);
+            fillRect(23, 15, 24, 16);
+            fillRect(23, 17, 23, 20);
+            fillRect(25, 17, 25, 18);
+            fillRect(26, 19, 27, 20);
+            fillRect(27, 18, 27, 15);
+            deadEmptyRect(25, 17, 26, 18);
+            deadEmptyRect(25, 17, 26, 18);
 
             quer(33, 18, 32, 19);
             quer(32, 20, 31, 21);
             quer(31, 22, 30, 23);
             fillRect(34, 19, 34, 20);
-            fillRect(35,21,35,22);
-            place(36,23);
+            fillRect(35, 21, 35, 22);
+            place(36, 23);
             fillRect(32, 21, 34, 21);
-            deadEmptyRect(33,19,33,20);
+            deadEmptyRect(33, 19, 33, 20);
         }
 
         if (number >= 12) {//PacMan
